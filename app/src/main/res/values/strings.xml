@@ -1,3 +1,9 @@
 <resources>
     <string name="app_name">MyDrobe</string>
+    <string name="tienda">TIENDA</string>
+    <string name="click">CLICK</string>
+    <string name="elclickero">ELCLICKERO</string>
+    <string name="comprar_mejora">Comprar Mejora</string>
+    <string name="generar_frase">Generar Frase</string>
+    <string name="tienda2">Tienda</string>
 </resources>
