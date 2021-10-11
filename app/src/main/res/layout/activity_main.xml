@@ -11,7 +11,7 @@
         android:id="@+id/button"
         android:layout_width="155dp"
         android:layout_height="78dp"
-        android:layout_marginBottom="136dp"
+        android:layout_marginBottom="100dp"
         android:onClick="sendMessage"
         android:text="@string/tienda"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -19,17 +19,18 @@
         app:layout_constraintStart_toStartOf="parent" />
 
     <Button
-        android:id="@+id/button2"
+        android:id="@+id/bt"
         android:layout_width="315dp"
         android:layout_height="220dp"
         android:background="#AC3C3C"
         android:backgroundTint="@color/teal_200"
+        android:onClick="cliker"
         android:text="@string/click"
         app:layout_constraintBottom_toTopOf="@+id/button"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.598" />
+        app:layout_constraintVertical_bias="0.546" />
 
     <TextView
         android:id="@+id/Tienda"
@@ -37,8 +38,22 @@
         android:layout_height="wrap_content"
         android:text="@string/elclickero"
         android:textAppearance="@style/TextAppearance.AppCompat.Display1"
-        app:layout_constraintBottom_toTopOf="@+id/button2"
+        app:layout_constraintBottom_toTopOf="@+id/bt"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/tx"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/tx"
+        android:textSize="50sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.498"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/bt"
+        app:layout_constraintVertical_bias="0.155" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>
