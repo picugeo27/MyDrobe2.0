@@ -9,4 +9,5 @@
     <string name="contador">0</string>
     <string name="tx">0</string>
     <string name="atras">ATRAS</string>
+    <string name="normal">Normal</string>
 </resources>
