@@ -4,55 +4,76 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#DDD589"
+    android:background="#5C7AEA"
     tools:context=".MainActivity">
 
+    <ImageView
+        android:id="@+id/toldo_tienda"
+        android:layout_width="406dp"
+        android:layout_height="173dp"
+        android:paddingBottom="60sp"
+        app:layout_constraintBottom_toTopOf="@+id/titulo_tienda"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.4"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/volver_atras"
+        app:layout_constraintVertical_bias="0.0"
+        app:srcCompat="@drawable/tienda_background_image" />
+
     <TextView
-        android:id="@+id/Tienda"
+        android:id="@+id/titulo_tienda"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/tienda2"
         android:textAppearance="@style/TextAppearance.AppCompat.Display1"
+        android:textColor="#E6E6E6"
+        android:textSize="60sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.498"
+        app:layout_constraintHorizontal_bias="0.497"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.135" />
+        app:layout_constraintVertical_bias="0.256" />
 
     <Button
-        android:id="@+id/button3"
+        android:id="@+id/generar_frase"
         android:layout_width="231dp"
         android:layout_height="90dp"
+        android:backgroundTint="#E6E6E6"
         android:text="@string/generar_frase"
+        android:textColor="@color/black"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.491"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.324" />
+        app:layout_constraintTop_toBottomOf="@+id/toldo_tienda"
+        app:layout_constraintVertical_bias="0.205" />
 
     <Button
-        android:id="@+id/button4"
+        android:id="@+id/comprar_mejora"
         android:layout_width="231dp"
         android:layout_height="90dp"
+        android:backgroundTint="#E6E6E6"
         android:text="@string/comprar_mejora"
+        android:textColor="@color/black"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.634" />
+        app:layout_constraintTop_toBottomOf="@+id/generar_frase"
+        app:layout_constraintVertical_bias="0.376" />
 
     <Button
-        android:id="@+id/button5"
+        android:id="@+id/volver_atras"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:backgroundTint="#E6E6E6"
         android:onClick="back"
-        android:text="ATRAS"
+        android:text="@string/atras"
+        android:textColor="@color/black"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.049"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.023" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>
