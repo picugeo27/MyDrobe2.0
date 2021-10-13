@@ -13,7 +13,7 @@
         android:layout_width="155dp"
         android:layout_height="78dp"
         android:backgroundTint="#E6E6E6"
-        android:onClick="sendMessage"
+        android:onClick="irTienda"
         android:text="@string/tienda"
         android:textColor="#000000"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -38,13 +38,15 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/tx"
+        android:textColor="#1A237E"
         android:textSize="50sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/bt_moneda"
-        app:layout_constraintVertical_bias="0.1" />
+        app:layout_constraintVertical_bias="0.1"
+        tools:ignore="TextContrastCheck" />
 
     <Button
         android:id="@+id/bt_moneda"
@@ -52,6 +54,7 @@
         android:layout_height="358dp"
         android:backgroundTint="#00FFFFFF"
         android:foreground="@drawable/efecto_btn_moneda"
+        android:onClick="cliker"
         android:rotationX="3"
         app:iconTint="#00FFFFFF"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -64,7 +67,7 @@
     <Button
         android:id="@+id/btn_cambio_modo"
         android:layout_width="48dp"
-        android:layout_height="47dp"
+        android:layout_height="48dp"
         android:layout_marginEnd="62dp"
         android:layout_marginBottom="24dp"
         android:backgroundTint="#00FFFFFF"
