@@ -8,7 +8,15 @@ import android.widget.TextView;
 
 import com.google.android.material.snackbar.Snackbar;
 
+import java.util.ArrayList;
+
 public class MainActivity extends AppCompatActivity {
+
+    int modo = 0;
+    ArrayList<String> poolFrasesNormales = new ArrayList<>();
+    ArrayList<String> poolFrasesObscenas = new ArrayList<>();
+    Usuario usuario = new Usuario();
+
     int mCounter = 0;
     int mlt=1;
     TextView txv,coin;
@@ -17,18 +25,6 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-    }
-
-    public void recuperarP(View view){
-        setContentView(R.layout.activity_main);
-        txv = (TextView) findViewById (R.id.tx_puntos);
-        txv.setText(Integer.toString(mCounter));
-    }
-
-    public void irTienda(View view) {
-        setContentView(R.layout.interfaztienda);
-        coin = (TextView) findViewById (R.id.tx_puntos_tienda);
-        coin.setText(Integer.toString(mCounter));
     }
 
     public void cliker(View view) {
@@ -50,9 +46,62 @@ public class MainActivity extends AppCompatActivity {
             coin.setText(Integer.toString(mCounter));
         }
     }
+    /*
+    ***********************************
+    *
+    * Setters y getters
+    *
+    * *********************************
+    */
+    public int getModo() {
+        return modo;
+    }
 
-    public void obscen (View view){
+    public void setModo(int modo) {
+        this.modo = modo;
+    }
+
+    public ArrayList<String> getPoolFrasesNormales() {
+        return poolFrasesNormales;
+    }
+
+    public ArrayList<String> getPoolFrasesObscenas() {
+        return poolFrasesObscenas;
+    }
+
+    public Usuario getUsuario() {
+        return usuario;
+    }
+
+    public void setUsuario(Usuario usuario) {
+        this.usuario = usuario;
+    }
+
+    /*
+    ********************************
+    *
+    * Botones que cambian de interfaz (y el modo)
+    *
+    * *******************************
+    */
+    public void showTienda(View view) {
+        setContentView(R.layout.interfaztienda);
+    }
+
+    public void showObsceno (View view){
+        modo=1;
         setContentView(R.layout.interfazobscene);
     }
 
+    public void showMenu (View view){
+        modo=0;
+        setContentView(R.layout.activity_main);
+    }
+
+    public void atras (View view){
+        if (modo==0) {
+            setContentView(R.layout.activity_main);
+        } else
+            setContentView(R.layout.interfazobscene);
+    }
 }
