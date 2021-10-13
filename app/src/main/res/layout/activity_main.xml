@@ -4,56 +4,77 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#DDD589"
+    android:background="@drawable/fondo_interfaz_menu"
+    android:orientation="vertical"
     tools:context=".MainActivity">
 
     <Button
-        android:id="@+id/button"
+        android:id="@+id/btn_acceso_tienda"
         android:layout_width="155dp"
         android:layout_height="78dp"
-        android:layout_marginBottom="100dp"
-        android:onClick="sendMessage"
+        android:backgroundTint="#E6E6E6"
+        android:onClick="irTienda"
         android:text="@string/tienda"
+        android:textColor="#000000"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tx_puntos" />
 
-    <Button
-        android:id="@+id/bt"
-        android:layout_width="315dp"
-        android:layout_height="220dp"
-        android:background="#AC3C3C"
-        android:backgroundTint="@color/teal_200"
-        android:onClick="cliker"
-        android:text="@string/click"
-        app:layout_constraintBottom_toTopOf="@+id/button"
+    <TextView
+        android:id="@+id/tx_frases_bonitas"
+        android:layout_width="368dp"
+        android:layout_height="139dp"
+        android:textAppearance="@style/TextAppearance.AppCompat.Display1"
+        app:layout_constraintBottom_toTopOf="@+id/bt_moneda"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.497"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.546" />
+        app:layout_constraintVertical_bias="0.564" />
 
     <TextView
-        android:id="@+id/str_titulo_tienda"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/elclickero"
-        android:textAppearance="@style/TextAppearance.AppCompat.Display1"
-        app:layout_constraintBottom_toTopOf="@+id/bt"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <TextView
-        android:id="@+id/tx"
+        android:id="@+id/tx_puntos"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/tx"
+        android:textColor="#1A237E"
         android:textSize="50sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/bt"
-        app:layout_constraintVertical_bias="0.155" />
+        app:layout_constraintTop_toBottomOf="@+id/bt_moneda"
+        app:layout_constraintVertical_bias="0.1"
+        tools:ignore="TextContrastCheck" />
+
+    <Button
+        android:id="@+id/bt_moneda"
+        android:layout_width="359dp"
+        android:layout_height="358dp"
+        android:backgroundTint="#00FFFFFF"
+        android:foreground="@drawable/efecto_btn_moneda"
+        android:onClick="cliker"
+        android:rotationX="3"
+        app:iconTint="#00FFFFFF"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.476"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.428" />
+
+    <Button
+        android:id="@+id/btn_cambio_modo"
+        android:layout_width="48dp"
+        android:layout_height="48dp"
+        android:layout_marginEnd="62dp"
+        android:layout_marginBottom="24dp"
+        android:backgroundTint="#00FFFFFF"
+        android:drawableBottom="@drawable/imagen_fuego"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/btn_acceso_tienda"
+        app:layout_constraintHorizontal_bias="0.888"
+        app:layout_constraintStart_toStartOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
