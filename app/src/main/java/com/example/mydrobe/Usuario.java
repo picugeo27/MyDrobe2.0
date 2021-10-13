@@ -6,7 +6,6 @@ import java.util.ArrayList;
 public class Usuario  implements Serializable {
 private ArrayList<String> poolfrasesNormales;
 private ArrayList<String> poolfrasesObscenas;
-
 private int valorClick=1;
 private int contador = 0;
 
