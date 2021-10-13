@@ -6,8 +6,8 @@ import java.util.ArrayList;
 public class Usuario  implements Serializable {
 private ArrayList<String> poolfrasesNormales;
 private ArrayList<String> poolfrasesObscenas;
-private int valorClick=1;
-private int contador = 0;
+private int valorClick= 1;
+private int contador =  0;
 
     public ArrayList<String> getPoolfrasesNormales() {
         return poolfrasesNormales;
@@ -41,7 +41,7 @@ private int contador = 0;
         this.contador = contador;
     }
 
-    public int clicar () {
+    public int clicar () { // esta funcion añade al contador del usuario el valor de su click
             contador=contador+(valorClick);
             return contador;
         }
