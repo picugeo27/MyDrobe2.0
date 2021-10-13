@@ -11,6 +11,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:backgroundTint="#2D3740"
+        android:onClick="recuperarP"
         android:text="@string/normal"
         android:textColor="#E6E6E6"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -28,7 +29,6 @@
         android:drawableBottom="@drawable/img_clicker_modo_obsceno"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.57"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         tools:ignore="SpeakableTextPresentCheck" />

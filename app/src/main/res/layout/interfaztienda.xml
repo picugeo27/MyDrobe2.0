@@ -53,6 +53,7 @@
         android:layout_width="231dp"
         android:layout_height="90dp"
         android:backgroundTint="#E6E6E6"
+        android:onClick="multiplicador"
         android:text="@string/comprar_mejora"
         android:textColor="@color/black"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -66,7 +67,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:backgroundTint="#E6E6E6"
-        android:onClick="back"
+        android:onClick="recuperarP"
         android:text="ATRÁS"
         android:textColor="@color/black"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -75,5 +76,20 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.023" />
+
+    <TextView
+        android:id="@+id/tx_puntos_tienda"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/tx"
+        android:textColor="#1A237E"
+        android:textSize="50sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.498"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.975"
+        tools:ignore="TextContrastCheck" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

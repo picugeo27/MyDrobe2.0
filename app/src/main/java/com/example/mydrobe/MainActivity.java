@@ -27,7 +27,7 @@ public class MainActivity extends AppCompatActivity {
 
     public void irTienda(View view) {
         setContentView(R.layout.interfaztienda);
-        coin = (TextView) findViewById (R.id.coins);
+        coin = (TextView) findViewById (R.id.tx_puntos_tienda);
         coin.setText(Integer.toString(mCounter));
     }
 
@@ -37,12 +37,11 @@ public class MainActivity extends AppCompatActivity {
         txv.setText(Integer.toString(mCounter));
     }
     public void multiplicador(View view){
-        coin = (TextView) findViewById (R.id.coins);
+        coin = (TextView) findViewById (R.id.tx_puntos_tienda);
         String c = (String) coin.getText();
-        System.out.println(c);
         int num = Integer.parseInt(c);
         if (num<10*mlt){
-            Snackbar mySnackbar = Snackbar.make(view, "No tiene dinero suficiente", 1000);
+            Snackbar mySnackbar = Snackbar.make(view, "No tienes dinero suficiente", 1000);
             mySnackbar.show();
         }
         else {
@@ -50,6 +49,10 @@ public class MainActivity extends AppCompatActivity {
             mlt++;
             coin.setText(Integer.toString(mCounter));
         }
+    }
+
+    public void obscen (View view){
+        setContentView(R.layout.interfazobscene);
     }
 
 }
