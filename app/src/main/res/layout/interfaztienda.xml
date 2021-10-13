@@ -36,6 +36,7 @@
         android:id="@+id/button4"
         android:layout_width="231dp"
         android:layout_height="90dp"
+        android:onClick="multiplicador"
         android:text="@string/comprar_mejora"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
