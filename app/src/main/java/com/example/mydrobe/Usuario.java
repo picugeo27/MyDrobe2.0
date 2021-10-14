@@ -45,7 +45,7 @@ private int contador =  0;
             contador=contador+(valorClick);
             return contador;
         }
-    public void aplicarMejoraClicks() {
+    public void aplicarMejoraClicks() { // multiplica por 2 el valor del click
         this.setValorClick(valorClick*2);
     }
 
