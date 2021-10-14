@@ -45,6 +45,9 @@ private int contador =  0;
             contador=contador+(valorClick);
             return contador;
         }
+    public void aplicarMejoraClicks() {
+        this.setValorClick(valorClick*2);
+    }
 
     }
 
