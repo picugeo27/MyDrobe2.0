@@ -21,38 +21,17 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.976" />
 
-    <Button
-        android:id="@+id/btn_clicker"
-        android:layout_width="199dp"
-        android:layout_height="201dp"
-        android:background="@android:color/transparent"
-        android:drawableBottom="@drawable/img_clicker_modo_obsceno"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        tools:ignore="SpeakableTextPresentCheck" />
-
     <TextView
         android:id="@+id/txt_frase_obscena"
         android:layout_width="401dp"
         android:layout_height="145dp"
-        android:text="TextView"
+        android:textColor="#FFFFFF"
+        android:textSize="35sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.027" />
-
-    <ImageView
-        android:id="@+id/imageView"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/img_obsceno_fondo" />
 
     <Button
         android:id="@+id/btn_acceso_tienda2"
@@ -66,5 +45,28 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.852" />
+        app:layout_constraintVertical_bias="0.872" />
+
+    <TextView
+        android:id="@+id/tx_puntos_obsceno"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="0"
+        android:textColor="#FFFFFF"
+        android:textSize="50sp"
+        app:layout_constraintBottom_toTopOf="@+id/btn_acceso_tienda2"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <Button
+        android:id="@+id/bt_obsceno"
+        android:layout_width="461dp"
+        android:layout_height="317dp"
+        android:backgroundTint="#00FFFFFF"
+        android:foreground="@drawable/boton_obsceno"
+        android:onClick="cliker"
+        app:layout_constraintBottom_toTopOf="@+id/tx_puntos_obsceno"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/txt_frase_obscena" />
 </androidx.constraintlayout.widget.ConstraintLayout>

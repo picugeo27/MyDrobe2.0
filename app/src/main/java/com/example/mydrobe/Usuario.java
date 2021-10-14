@@ -9,6 +9,14 @@ private ArrayList<String> poolfrasesObscenas;
 private int valorClick= 1;
 private int contador =  0;
 
+    /*
+     ***********************************
+     *
+     * Setters y getters
+     *
+     * *********************************
+     */
+
     public ArrayList<String> getPoolfrasesNormales() {
         return poolfrasesNormales;
     }
