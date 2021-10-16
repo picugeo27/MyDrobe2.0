@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
 import android.view.View;
+import android.widget.EditText;
 import android.widget.TextView;
 
 import com.google.android.material.snackbar.Snackbar;
@@ -14,6 +15,7 @@ import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Random;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -40,18 +42,18 @@ public class MainActivity extends AppCompatActivity {
     public void cliker(View view) {
         usuario.clicar();
         txPuntos.setText(Integer.toString(usuario.getContador()));
-
-        int cont = usuario.getContador();
-        if ((cont%10)==0){
-            FraseAleatoria(poolFrasesNormales);
+        if (modo==0) {
+            FraseAleatoria(usuario.getPoolfrasesNormales());
+        } else{
+            FraseAleatoria(usuario.getPoolfrasesObscenas());
         }
     }
 
     public void FraseAleatoria(@NonNull ArrayList<String> poolFrases) {
         int RangoAleatorio = poolFrases.size();
-        int numeroAleatorio = (int) (Math.random() * RangoAleatorio);
-        String FraseMostrar = poolFrases.get(numeroAleatorio);
-
+        Random claseRandom = new Random(); // Esto crea una instancia de la Clase Random
+        claseRandom.nextInt(RangoAleatorio);
+        String FraseMostrar = poolFrases.get(claseRandom.nextInt(RangoAleatorio));
         TextView fraseAleatoria;
         fraseAleatoria = (TextView) findViewById (R.id.tx_frases_bonitas);
         fraseAleatoria.setText(FraseMostrar);
@@ -64,6 +66,7 @@ public class MainActivity extends AppCompatActivity {
     *
     * *********************************
     */
+
     public int getModo() {
         return modo;
     }
@@ -105,7 +108,7 @@ public class MainActivity extends AppCompatActivity {
     public void showObsceno (View view){
         modo=1;
         setContentView(R.layout.interfazobscene);
-        txPuntos = (TextView) findViewById(R.id.tx_puntos_obsceno);
+        txPuntos = (TextView) findViewById(R.id.tx_puntos);
         txPuntos.setText(Integer.toString(usuario.getContador()));
     }
 
@@ -114,6 +117,10 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         txPuntos = (TextView) findViewById (R.id.tx_puntos);
         txPuntos.setText(Integer.toString(usuario.getContador()));
+    }
+
+    public void showCrearFrase (View view){
+        setContentView(R.layout.frases_custom);
     }
 
     public void atras (View view){
@@ -149,6 +156,19 @@ public class MainActivity extends AppCompatActivity {
             mySnackbar.show();
         }
     }
-
-
+    public void CrearFrase(View view){
+        EditText eText = (EditText) findViewById(R.id.frasesCreadas);
+        String str = eText.getText().toString();
+        if (usuario.pago(50)){
+            if (modo==0) {
+                usuario.AnadirFrase(usuario.getPoolfrasesNormales(), str);
+            } else{
+                usuario.AnadirFrase(usuario.getPoolfrasesObscenas(), str);
+            }
+            showTienda(view);
+        } else{
+            Snackbar mySnackbar = Snackbar.make(view, "No tienes dinero suficiente", 1000);
+            mySnackbar.show();
+        }
+    }
 }

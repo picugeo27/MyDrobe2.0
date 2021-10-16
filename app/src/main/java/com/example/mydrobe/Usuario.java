@@ -1,13 +1,20 @@
 package com.example.mydrobe;
 
+import android.view.View;
+import android.widget.EditText;
+
+import androidx.annotation.NonNull;
+
+import com.google.android.material.snackbar.Snackbar;
+
 import java.io.Serializable;
 import java.util.ArrayList;
 
 public class Usuario  implements Serializable {
-private ArrayList<String> poolfrasesNormales;
-private ArrayList<String> poolfrasesObscenas;
+private ArrayList<String> poolfrasesNormales=new ArrayList<>();
+private ArrayList<String> poolfrasesObscenas=new ArrayList<>();
 private int valorClick= 1;
-private int contador =  0;
+private int contador =  200;
 
     public ArrayList<String> getPoolfrasesNormales() {
         return poolfrasesNormales;
@@ -71,13 +78,9 @@ private int contador =  0;
         return false;
     }
 
-    public void AñadirFrase(ArrayList<String> arrayFrases, String frase, int coste){
-        if(pago(coste)) {
+    public void AnadirFrase(@NonNull ArrayList<String> arrayFrases, String frase){//si quieres añadir a frases normales se le pasa el array normal, al igual que obsceno
             arrayFrases.add(frase);
-        }
     }
-
-
 }
 
 
