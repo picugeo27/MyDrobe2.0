@@ -70,6 +70,14 @@ private int contador =  0;
         }
         return yaEsta;
     }
+
+    public boolean pago(int coste){
+        if (contador>coste){
+            contador= contador - coste;
+            return true;
+        }
+        return false;
+    }
 }
 
 
