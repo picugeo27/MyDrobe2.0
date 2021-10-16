@@ -45,10 +45,10 @@ private int contador =  0;
             contador=contador+(valorClick);
             return contador;
         }
+
     public void aplicarMejoraClicks() {
         this.setValorClick(valorClick*2);
     }
-
 
     public boolean yaEstaFrase(ArrayList<String> frases, ArrayList<String> frases2){
         boolean yaEsta = false;
@@ -64,7 +64,7 @@ private int contador =  0;
     }
 
     public boolean pago(int coste){
-        if (contador>coste){
+        if (contador>=coste){
             contador= contador - coste;
             return true;
         }
