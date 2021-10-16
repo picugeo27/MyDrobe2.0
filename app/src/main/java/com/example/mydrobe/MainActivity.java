@@ -2,8 +2,14 @@ package com.example.mydrobe;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.app.ActivityCompat;
+import androidx.core.content.ContextCompat;
 
+import android.Manifest;
+import android.content.pm.PackageManager;
+import android.os.Build;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.TextView;
@@ -32,11 +38,8 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         txPuntos = (TextView) findViewById (R.id.tx_puntos);
-        try {
-            anadirFrases("normal", poolFrasesNormales);
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+        poolFrasesNormales.add("pepe");
+        poolFrasesObscenas.add("pepe obsceno");
     }
 
     public void cliker(View view) {
@@ -98,6 +101,7 @@ public class MainActivity extends AppCompatActivity {
     *
     * *******************************
     */
+
     public void showTienda(View view) {
         setContentView(R.layout.interfaztienda);
         txPuntos = (TextView) findViewById(R.id.tx_puntos_tienda);
@@ -130,22 +134,13 @@ public class MainActivity extends AppCompatActivity {
             showObsceno(view);
     }
 
-
-    public static void anadirFrases(String TipoFrase, ArrayList<String> poolFrases) throws FileNotFoundException, IOException {
-        String direccionArchivo="";
-        if (TipoFrase =="normal"){
-            direccionArchivo = "FrasesNormales.txt" ;
-        }else if(TipoFrase=="obsceno"){
-            direccionArchivo = "FrasesObscenas.txt" ;
-        }
-        String cadena;
-        FileReader f = new FileReader(direccionArchivo);
-        BufferedReader b = new BufferedReader(f);
-        while ((cadena = b.readLine()) != null) {
-            poolFrases.add(cadena);
-        }
-        b.close();
-    }
+    /*
+     ********************************
+     *
+     * Botones de tienda
+     *
+     * *******************************
+     */
 
     public void MejorarClicks(View view){
         if(usuario.pago(usuario.getValorClick()*10)){
@@ -170,5 +165,21 @@ public class MainActivity extends AppCompatActivity {
             Snackbar mySnackbar = Snackbar.make(view, "No tienes dinero suficiente", 1000);
             mySnackbar.show();
         }
+    }
+
+    public void ComprarFrase(View view){
+        String frase;
+        if (usuario.pago(25)){
+            if (modo==0){
+            frase = usuario.yaEstaFrase(poolFrasesNormales,usuario.getPoolfrasesNormales());
+            usuario.AnadirFrase(usuario.getPoolfrasesNormales(),frase);
+        } else {
+            frase = usuario.yaEstaFrase(poolFrasesObscenas,usuario.getPoolfrasesObscenas());
+            usuario.AnadirFrase(usuario.getPoolfrasesObscenas(),frase);
+        } if (frase==null) {
+                Snackbar mySnackbar = Snackbar.make(view, "Ya has desbloqueado todas las frases", 1000);
+                mySnackbar.show();
+            }
+    }
     }
 }
