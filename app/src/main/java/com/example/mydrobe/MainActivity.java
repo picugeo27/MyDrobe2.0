@@ -138,6 +138,7 @@ public class MainActivity extends AppCompatActivity {
             showObsceno(view);
     }
 
+
     public static void anadirFrases(String TipoFrase, ArrayList<String> poolFrases) throws FileNotFoundException, IOException {
         String direccionArchivo="";
         if (TipoFrase =="normal"){
@@ -153,5 +154,14 @@ public class MainActivity extends AppCompatActivity {
         }
         b.close();
     }
+
+    public boolean MejorarClicks(int coste){
+        if(usuario.pago(coste)){
+            usuario.aplicarMejoraClicks();
+            return true;
+        }
+        return false;
+    }
+
 
 }
