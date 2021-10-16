@@ -14,7 +14,7 @@ public class Usuario  implements Serializable {
 private ArrayList<String> poolfrasesNormales=new ArrayList<>();
 private ArrayList<String> poolfrasesObscenas=new ArrayList<>();
 private int valorClick= 1;
-private int contador =  200;
+private int contador =  0;
 
     public ArrayList<String> getPoolfrasesNormales() {
         return poolfrasesNormales;
@@ -57,17 +57,15 @@ private int contador =  200;
         this.setValorClick(valorClick*2);
     }
 
-    public boolean yaEstaFrase(ArrayList<String> frases, ArrayList<String> frases2){
-        boolean yaEsta = false;
-        for (String delUsuario: frases){
-            for (String delSistema : frases2){
-                yaEsta = delUsuario.equals(delSistema);
-                if (yaEsta){
-                    return yaEsta;
-                }
+    public String yaEstaFrase(ArrayList<String> frases, ArrayList<String> frases2){
+        boolean yaEsta = true;
+        for (String delSistema: frases){
+            yaEsta = frases2.contains(delSistema);
+                if (!yaEsta){
+                    return delSistema;
             }
         }
-        return yaEsta;
+        return null;
     }
 
     public boolean pago(int coste){
@@ -79,7 +77,9 @@ private int contador =  200;
     }
 
     public void AnadirFrase(@NonNull ArrayList<String> arrayFrases, String frase){//si quieres añadir a frases normales se le pasa el array normal, al igual que obsceno
+        if (frase!=null) {
             arrayFrases.add(frase);
+        }
     }
 }
 
