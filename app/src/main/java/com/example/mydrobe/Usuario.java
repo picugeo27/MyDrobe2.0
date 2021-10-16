@@ -71,6 +71,11 @@ private int contador =  0;
         return false;
     }
 
+    public void AñadirFrase(ArrayList<String> arrayFrases, String frase, int coste){
+        if(pago(coste)) {
+            arrayFrases.add(frase);
+        }
+    }
 
 
 }
