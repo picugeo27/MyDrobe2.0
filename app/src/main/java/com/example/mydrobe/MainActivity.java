@@ -47,31 +47,16 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
-    public void multiplicador(View view){
-        String c = (String) txPuntos.getText();
-        int num = Integer.parseInt(c);
-        if (num<10*mlt){
-            Snackbar mySnackbar = Snackbar.make(view, "No tienes dinero suficiente", 1000);
-            mySnackbar.show();
-        }
-        else {
-            mlt++;
-            txPuntos.setText(Integer.toString(usuario.getContador()));
-        }
-    }
-
-
-
     public void FraseAleatoria(@NonNull ArrayList<String> poolFrases) {
         int RangoAleatorio = poolFrases.size();
         int numeroAleatorio = (int) (Math.random() * RangoAleatorio);
         String FraseMostrar = poolFrases.get(numeroAleatorio);
 
-
         TextView fraseAleatoria;
         fraseAleatoria = (TextView) findViewById (R.id.tx_frases_bonitas);
         fraseAleatoria.setText(FraseMostrar);
     }
+
     /*
     ***********************************
     *
@@ -155,12 +140,14 @@ public class MainActivity extends AppCompatActivity {
         b.close();
     }
 
-    public boolean MejorarClicks(int coste){
-        if(usuario.pago(coste)){
+    public void MejorarClicks(View view){
+        if(usuario.pago(usuario.getValorClick()*10)){
             usuario.aplicarMejoraClicks();
-            return true;
+            txPuntos.setText(Integer.toString(usuario.getContador()));
+        } else {
+            Snackbar mySnackbar = Snackbar.make(view, "No tienes dinero suficiente", 1000);
+            mySnackbar.show();
         }
-        return false;
     }
 
 
