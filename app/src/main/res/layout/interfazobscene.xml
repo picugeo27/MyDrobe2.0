@@ -22,16 +22,18 @@
         app:layout_constraintVertical_bias="0.976" />
 
     <TextView
-        android:id="@+id/txt_frase_obscena"
+        android:id="@+id/tx_frases_bonitas"
         android:layout_width="401dp"
         android:layout_height="145dp"
+        android:text="Bienvenido"
         android:textColor="#FFFFFF"
         android:textSize="35sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.027" />
+        app:layout_constraintVertical_bias="0.027"
+        tools:textAlignment="center" />
 
     <Button
         android:id="@+id/btn_acceso_tienda2"
@@ -45,18 +47,22 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.872" />
+        app:layout_constraintVertical_bias="0.901" />
 
     <TextView
-        android:id="@+id/tx_puntos_obsceno"
+        android:id="@+id/tx_puntos"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginTop="248dp"
         android:text="0"
         android:textColor="#FFFFFF"
         android:textSize="50sp"
         app:layout_constraintBottom_toTopOf="@+id/btn_acceso_tienda2"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintHorizontal_bias="0.498"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/bt_obsceno"
+        app:layout_constraintVertical_bias="0.0" />
 
     <Button
         android:id="@+id/bt_obsceno"
@@ -65,8 +71,9 @@
         android:backgroundTint="#00FFFFFF"
         android:foreground="@drawable/boton_obsceno"
         android:onClick="cliker"
-        app:layout_constraintBottom_toTopOf="@+id/tx_puntos_obsceno"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/txt_frase_obscena" />
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.468" />
 </androidx.constraintlayout.widget.ConstraintLayout>
