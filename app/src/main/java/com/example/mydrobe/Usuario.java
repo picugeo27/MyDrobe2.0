@@ -57,6 +57,19 @@ private int contador =  0;
         this.setValorClick(valorClick*2);
     }
 
+
+    public boolean yaEstaFrase(ArrayList<String> frases, ArrayList<String> frases2){
+        boolean yaEsta = false;
+        for (String delUsuario: frases){
+            for (String delSistema : frases2){
+                yaEsta = delUsuario.equals(delSistema);
+                if (yaEsta){
+                    return yaEsta;
+                }
+            }
+        }
+        return yaEsta;
     }
+}
 
 
