@@ -1,5 +1,6 @@
 package com.example.mydrobe;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
@@ -8,6 +9,10 @@ import android.widget.TextView;
 
 import com.google.android.material.snackbar.Snackbar;
 
+import java.io.BufferedReader;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
+import java.io.IOException;
 import java.util.ArrayList;
 
 public class MainActivity extends AppCompatActivity {
@@ -25,11 +30,21 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         txPuntos = (TextView) findViewById (R.id.tx_puntos);
+        try {
+            anadirFrases("normal", poolFrasesNormales);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
     public void cliker(View view) {
         usuario.clicar();
         txPuntos.setText(Integer.toString(usuario.getContador()));
+
+        int cont = usuario.getContador();
+        if ((cont%10)==0){
+            FraseAleatoria(poolFrasesNormales);
+        }
     }
 
     public void multiplicador(View view){
@@ -43,6 +58,19 @@ public class MainActivity extends AppCompatActivity {
             mlt++;
             txPuntos.setText(Integer.toString(usuario.getContador()));
         }
+    }
+
+
+
+    public void FraseAleatoria(@NonNull ArrayList<String> poolFrases) {
+        int RangoAleatorio = poolFrases.size();
+        int numeroAleatorio = (int) (Math.random() * RangoAleatorio);
+        String FraseMostrar = poolFrases.get(numeroAleatorio);
+
+
+        TextView fraseAleatoria;
+        fraseAleatoria = (TextView) findViewById (R.id.tx_frases_bonitas);
+        fraseAleatoria.setText(FraseMostrar);
     }
     /*
     ***********************************
@@ -109,4 +137,21 @@ public class MainActivity extends AppCompatActivity {
         } else
             showObsceno(view);
     }
+
+    public static void anadirFrases(String TipoFrase, ArrayList<String> poolFrases) throws FileNotFoundException, IOException {
+        String direccionArchivo="";
+        if (TipoFrase =="normal"){
+            direccionArchivo = "FrasesNormales.txt" ;
+        }else if(TipoFrase=="obsceno"){
+            direccionArchivo = "FrasesObscenas.txt" ;
+        }
+        String cadena;
+        FileReader f = new FileReader(direccionArchivo);
+        BufferedReader b = new BufferedReader(f);
+        while ((cadena = b.readLine()) != null) {
+            poolFrases.add(cadena);
+        }
+        b.close();
+    }
+
 }
