@@ -109,4 +109,14 @@ public class MainActivity extends AppCompatActivity {
         } else
             showObsceno(view);
     }
+
+    public boolean MejorarClicks(int coste){
+        if(usuario.pago(coste)){
+            usuario.aplicarMejoraClicks();
+            return true;
+        }
+        return false;
+    }
+
+
 }
