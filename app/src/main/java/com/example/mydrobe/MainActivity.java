@@ -33,6 +33,7 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
+import java.util.Arrays;
 import java.util.Random;
 
 public class MainActivity extends AppCompatActivity {
@@ -51,7 +52,6 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-
         verificarPermisos();
 
         txPuntos = (TextView) findViewById (R.id.tx_puntos);
@@ -60,7 +60,6 @@ public class MainActivity extends AppCompatActivity {
             } catch (IOException | ClassNotFoundException e) {
                 e.printStackTrace();
             }
-
 
     }
 
@@ -189,6 +188,14 @@ public class MainActivity extends AppCompatActivity {
         return poolFrasesObscenas;
     }
 
+    public void setPoolFrasesNormales(ArrayList<String> poolFrasesNormales) {
+        this.poolFrasesNormales = poolFrasesNormales;
+    }
+
+    public void setPoolFrasesObscenas(ArrayList<String> poolFrasesObscenas) {
+        this.poolFrasesObscenas = poolFrasesObscenas;
+    }
+
     public Usuario getUsuario() {
         return usuario;
     }
@@ -238,22 +245,6 @@ public class MainActivity extends AppCompatActivity {
     }
 
 
-    public static void anadirFrases(String TipoFrase, ArrayList<String> poolFrases) throws FileNotFoundException, IOException {
-        String direccionArchivo="";
-        if (TipoFrase =="normal"){
-            direccionArchivo = "FrasesNormales.txt" ;
-        }else if(TipoFrase=="obsceno"){
-            direccionArchivo = "FrasesObscenas.txt" ;
-        }
-        String cadena;
-        FileReader f = new FileReader(direccionArchivo);
-        BufferedReader b = new BufferedReader(f);
-        while ((cadena = b.readLine()) != null) {
-            poolFrases.add(cadena);
-        }
-        b.close();
-    }
-
     public void MejorarClicks(View view){
         if(usuario.pago(usuario.getValorClick()*10)){
             usuario.aplicarMejoraClicks();
@@ -283,16 +274,22 @@ public class MainActivity extends AppCompatActivity {
         String frase;
         if (usuario.pago(25)){
             if (modo==0){
-            frase = usuario.yaEstaFrase(poolFrasesNormales,usuario.getPoolfrasesNormales());
-            usuario.AnadirFrase(usuario.getPoolfrasesNormales(),frase);
-        } else {
-            frase = usuario.yaEstaFrase(poolFrasesObscenas,usuario.getPoolfrasesObscenas());
-            usuario.AnadirFrase(usuario.getPoolfrasesObscenas(),frase);
-        } if (frase==null) {
+                frase = usuario.yaEstaFrase(poolFrasesNormales,usuario.getPoolfrasesNormales());
+                usuario.AnadirFrase(usuario.getPoolfrasesNormales(),frase);
+            } else {
+                frase = usuario.yaEstaFrase(poolFrasesObscenas,usuario.getPoolfrasesObscenas());
+                usuario.AnadirFrase(usuario.getPoolfrasesObscenas(),frase);
+             } if (frase==null) {
                 Snackbar mySnackbar = Snackbar.make(view, "Ya has desbloqueado todas las frases", 1000);
                 mySnackbar.show();
             }
-    }
+        }
     }
 
+    public void FrasesPredeterminadas(){
+        ArrayList<String> obscenas = new ArrayList<String>(
+                Arrays.asList("El metodo cascada es el mejor","ETA es una gran nación","Lo que nosotros hemos hecho, cosa que no hizo usted, es engañar a la gente",
+                        ""));
+        setPoolFrasesObscenas(obscenas);
+    }
 }
