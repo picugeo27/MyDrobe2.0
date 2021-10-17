@@ -293,7 +293,7 @@ public class MainActivity extends AppCompatActivity {
         setPoolFrasesNormales(normales);
         ArrayList<String> obscenas = new ArrayList<String>(
                 Arrays.asList("El metodo cascada es el mejor","ETA es una gran nación","Lo que nosotros hemos hecho, cosa que no hizo usted, es engañar a la gente",
-                        "¿Cual es la diferencia entre una disolución y una solución? Meter a un negro en ácido es una disolución, meterlos a todos es una solución"));
+                        "Tú y yo tenemos una cita y tu ropa no está invitada.","Tienes cara de ser el 9 que le falta a mi 6."));
         setPoolFrasesObscenas(obscenas);
     }
 }
