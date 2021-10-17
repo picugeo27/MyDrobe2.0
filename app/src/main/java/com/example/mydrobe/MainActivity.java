@@ -3,6 +3,7 @@ package com.example.mydrobe;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 
 import android.Manifest;
@@ -11,6 +12,7 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.os.Bundle;
+import android.os.Environment;
 import android.view.KeyEvent;
 import android.view.View;
 import android.widget.EditText;
@@ -32,11 +34,15 @@ import java.util.Arrays;
 import java.util.Random;
 
 public class MainActivity extends AppCompatActivity {
+
+    private static final int PERMISSION_CODE = 1;
+    private static final int PERMISSION_REQUEST_CODE = 1;
+
     Context context = this;
-    File fichero = new File("/data/user/0/com.example.mydrobe/files/usuarioUnico.bat");
     int modo = 0;
     ArrayList<String> poolFrasesNormales;
     ArrayList<String> poolFrasesObscenas;
+    File fichero = new File(Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOCUMENTS), "usuario.bat");
     Usuario usuario = new Usuario();
 
     int requestCode = 200;
@@ -46,15 +52,15 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
-        verificarPermisos();
 
-        txPuntos = (TextView) findViewById (R.id.tx_puntos);
-            try {
+        try {
                 inicializarSistema();
             } catch (IOException | ClassNotFoundException e) {
                 e.printStackTrace();
             }
+        setContentView(R.layout.activity_main);
+        txPuntos = (TextView) findViewById (R.id.tx_puntos);
+        txPuntos.setText(Integer.toString(usuario.getContador()));
         FrasesPredeterminadas();
     }
 
@@ -68,17 +74,14 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
-    private void verificarPermisos() {
-        int permES = ContextCompat.checkSelfPermission( context , Manifest.permission.READ_EXTERNAL_STORAGE);
-        int permEW = ContextCompat.checkSelfPermission( context , Manifest.permission.WRITE_EXTERNAL_STORAGE);
-
-        if (PackageManager.PERMISSION_GRANTED == permES && PackageManager.PERMISSION_GRANTED == permEW){
-            Toast.makeText( context, "Permiso garanted", Toast.LENGTH_SHORT).show();
-        }else{
-            requestPermissions(new String[]{Manifest.permission.READ_EXTERNAL_STORAGE},this.requestCode);
+    private boolean checkPermissions(){
+        if(ActivityCompat.checkSelfPermission(this, Manifest.permission.WRITE_EXTERNAL_STORAGE) == PackageManager.PERMISSION_GRANTED) {
+            return true;
         }
-
-
+        else {
+            ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE}, PERMISSION_CODE);
+            return false;
+        }
     }
 
     @Override
@@ -127,16 +130,23 @@ public class MainActivity extends AppCompatActivity {
             this.usuario = (Usuario) ois.readObject();
             ois.close();
         }
-        //Cargamos las frases en los arrays correspondientes.
-        String linea = null;
-        BufferedReader br = new BufferedReader(new FileReader("FrasesNormales.txt"));
-        while((linea = br.readLine()) != null) {
-            this.poolFrasesNormales.add(linea);
-
-            Toast.makeText( context, linea, Toast.LENGTH_SHORT).show();
+        else if (!fichero.exists()){
+            if (checkPermissions()) {
+                FileOutputStream fileOutputStream = null;
+                fichero.createNewFile();
+            }
         }
-        br.close();
 
+    }
+
+    public void crearFichero() {
+        if (!fichero.exists()){
+            try {
+                fichero.createNewFile();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
     }
 
     public void cliker(View view) {
@@ -213,7 +223,7 @@ public class MainActivity extends AppCompatActivity {
         txPuntos.setText(Integer.toString(usuario.getContador()));
     }
 
-    public void showObsceno (View view){
+    public void showObsceno (View view) {
         modo=1;
         setContentView(R.layout.interfazobscene);
         txPuntos = (TextView) findViewById(R.id.tx_puntos);
@@ -227,7 +237,7 @@ public class MainActivity extends AppCompatActivity {
         txPuntos.setText(Integer.toString(usuario.getContador()));
     }
 
-    public void showCrearFrase (View view){
+    public void showCrearFrase (View view) {
         setContentView(R.layout.frases_custom);
     }
 
@@ -266,7 +276,7 @@ public class MainActivity extends AppCompatActivity {
 
     public void ComprarFrase(View view){
         String frase;
-        if (usuario.pago(30)){
+        if (usuario.pago(25)){
             if (modo==0){
                 frase = usuario.yaEstaFrase(poolFrasesNormales,usuario.getPoolfrasesNormales());
                 usuario.AnadirFrase(usuario.getPoolfrasesNormales(),frase);
@@ -276,6 +286,7 @@ public class MainActivity extends AppCompatActivity {
              } if (frase==null) {
                 Snackbar mySnackbar = Snackbar.make(view, "Ya has desbloqueado todas las frases", 1000);
                 mySnackbar.show();
+                usuario.setContador(usuario.getContador()+30);
             }
         }
     }
