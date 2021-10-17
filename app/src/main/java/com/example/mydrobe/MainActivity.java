@@ -288,10 +288,12 @@ public class MainActivity extends AppCompatActivity {
 
     public void FrasesPredeterminadas(){
         ArrayList<String> normales = new ArrayList<String>(
-                Arrays.asList("El único modo de hacer un gran trabajo es amar lo que haces","Cuanto más duramente trabajo, más suerte tengo","La lógica te llevará de la a a la z. la imaginación te llevará a cualquier lugar","A veces la adversidad es lo que necesitas encarar para ser exitoso"));
+                Arrays.asList("El único modo de hacer un gran trabajo es amar lo que haces","Cuanto más duramente trabajo, más suerte tengo",
+                        "La lógica te llevará de la a a la z. la imaginación te llevará a cualquier lugar","A veces la adversidad es lo que necesitas encarar para ser exitoso"));
         setPoolFrasesNormales(normales);
         ArrayList<String> obscenas = new ArrayList<String>(
-                Arrays.asList("El metodo cascada es el mejor","ETA es una gran nación","Lo que nosotros hemos hecho, cosa que no hizo usted, es engañar a la gente", ""));
+                Arrays.asList("El metodo cascada es el mejor","ETA es una gran nación","Lo que nosotros hemos hecho, cosa que no hizo usted, es engañar a la gente",
+                        "¿Cual es la diferencia entre una disolución y una solución? Meter a un negro en ácido es una disolución, meterlos a todos es una solución"));
         setPoolFrasesObscenas(obscenas);
     }
 }
