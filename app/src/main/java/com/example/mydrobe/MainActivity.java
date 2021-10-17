@@ -3,6 +3,8 @@ package com.example.mydrobe;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.app.ActivityCompat;
+import androidx.core.content.ContextCompat;
 import androidx.core.content.ContextCompat;
 
 import android.Manifest;
@@ -11,15 +13,19 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.KeyEvent;
 import android.view.View;
+import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.android.material.snackbar.Snackbar;
 
 import java.io.BufferedReader;
+import java.io.FileNotFoundException;
 import java.io.FileReader;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.io.File;
 import java.io.FileInputStream;
@@ -27,6 +33,8 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
+import java.util.Arrays;
+import java.util.Random;
 
 public class MainActivity extends AppCompatActivity {
     Context context = this;
@@ -44,7 +52,6 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-
         verificarPermisos();
 
         txPuntos = (TextView) findViewById (R.id.tx_puntos);
@@ -53,7 +60,6 @@ public class MainActivity extends AppCompatActivity {
             } catch (IOException | ClassNotFoundException e) {
                 e.printStackTrace();
             }
-
 
     }
 
@@ -141,18 +147,18 @@ public class MainActivity extends AppCompatActivity {
     public void cliker(View view) {
         usuario.clicar();
         txPuntos.setText(Integer.toString(usuario.getContador()));
-
-        int cont = usuario.getContador();
-        if ((cont%10)==0){
-            fraseAleatoria(usuario.getPoolfrasesNormales()); /*¿No deberia coger las frases del ususario?*/
+        if (modo==0) {
+            fraseAleatoria(usuario.getPoolfrasesNormales());
+        } else{
+            fraseAleatoria(usuario.getPoolfrasesObscenas());
         }
     }
 
     public void fraseAleatoria(@NonNull ArrayList<String> poolFrases) {
         int RangoAleatorio = poolFrases.size();
-        int numeroAleatorio = (int) (Math.random() * RangoAleatorio);
-        String FraseMostrar = poolFrases.get(numeroAleatorio);
-
+        Random claseRandom = new Random(); // Esto crea una instancia de la Clase Random
+        claseRandom.nextInt(RangoAleatorio);
+        String FraseMostrar = poolFrases.get(claseRandom.nextInt(RangoAleatorio));
         TextView fraseAleatoria;
         fraseAleatoria = (TextView) findViewById (R.id.tx_frases_bonitas);
         fraseAleatoria.setText(FraseMostrar);
@@ -165,6 +171,7 @@ public class MainActivity extends AppCompatActivity {
     *
     * *********************************
     */
+
     public int getModo() {
         return modo;
     }
@@ -179,6 +186,14 @@ public class MainActivity extends AppCompatActivity {
 
     public ArrayList<String> getPoolFrasesObscenas() {
         return poolFrasesObscenas;
+    }
+
+    public void setPoolFrasesNormales(ArrayList<String> poolFrasesNormales) {
+        this.poolFrasesNormales = poolFrasesNormales;
+    }
+
+    public void setPoolFrasesObscenas(ArrayList<String> poolFrasesObscenas) {
+        this.poolFrasesObscenas = poolFrasesObscenas;
     }
 
     public Usuario getUsuario() {
@@ -196,6 +211,7 @@ public class MainActivity extends AppCompatActivity {
     *
     * *******************************
     */
+
     public void showTienda(View view) {
         setContentView(R.layout.interfaztienda);
         txPuntos = (TextView) findViewById(R.id.tx_puntos_tienda);
@@ -206,7 +222,7 @@ public class MainActivity extends AppCompatActivity {
     public void showObsceno (View view){
         modo=1;
         setContentView(R.layout.interfazobscene);
-        txPuntos = (TextView) findViewById(R.id.tx_puntos_obsceno);
+        txPuntos = (TextView) findViewById(R.id.tx_puntos);
         txPuntos.setText(Integer.toString(usuario.getContador()));
     }
 
@@ -217,6 +233,10 @@ public class MainActivity extends AppCompatActivity {
         txPuntos.setText(Integer.toString(usuario.getContador()));
     }
 
+    public void showCrearFrase (View view){
+        setContentView(R.layout.frases_custom);
+    }
+
     public void atras (View view){
         if (modo==0) {
             showMenu(view);
@@ -224,22 +244,6 @@ public class MainActivity extends AppCompatActivity {
             showObsceno(view);
     }
 
-
-    /*public static void anadirFrases(String TipoFrase, ArrayList<String> poolFrases) throws FileNotFoundException, IOException {
-        String direccionArchivo="";
-        if (TipoFrase =="normal"){
-            direccionArchivo = "FrasesNormales.txt" ;
-        }else if(TipoFrase=="obsceno"){
-            direccionArchivo = "FrasesObscenas.txt" ;
-        }
-        String cadena;
-        FileReader f = new FileReader(direccionArchivo);
-        BufferedReader b = new BufferedReader(f);
-        while ((cadena = b.readLine()) != null) {
-            poolFrases.add(cadena);
-        }
-        b.close();
-    }*/
 
     public void MejorarClicks(View view){
         if(usuario.pago(usuario.getValorClick()*10)){
@@ -250,5 +254,42 @@ public class MainActivity extends AppCompatActivity {
             mySnackbar.show();
         }
     }
+    public void CrearFrase(View view){
+        EditText eText = (EditText) findViewById(R.id.frasesCreadas);
+        String str = eText.getText().toString();
+        if (usuario.pago(50)){
+            if (modo==0) {
+                usuario.AnadirFrase(usuario.getPoolfrasesNormales(), str);
+            } else{
+                usuario.AnadirFrase(usuario.getPoolfrasesObscenas(), str);
+            }
+            showTienda(view);
+        } else{
+            Snackbar mySnackbar = Snackbar.make(view, "No tienes dinero suficiente", 1000);
+            mySnackbar.show();
+        }
+    }
 
+    public void ComprarFrase(View view){
+        String frase;
+        if (usuario.pago(25)){
+            if (modo==0){
+                frase = usuario.yaEstaFrase(poolFrasesNormales,usuario.getPoolfrasesNormales());
+                usuario.AnadirFrase(usuario.getPoolfrasesNormales(),frase);
+            } else {
+                frase = usuario.yaEstaFrase(poolFrasesObscenas,usuario.getPoolfrasesObscenas());
+                usuario.AnadirFrase(usuario.getPoolfrasesObscenas(),frase);
+             } if (frase==null) {
+                Snackbar mySnackbar = Snackbar.make(view, "Ya has desbloqueado todas las frases", 1000);
+                mySnackbar.show();
+            }
+        }
+    }
+
+    public void FrasesPredeterminadas(){
+        ArrayList<String> obscenas = new ArrayList<String>(
+                Arrays.asList("El metodo cascada es el mejor","ETA es una gran nación","Lo que nosotros hemos hecho, cosa que no hizo usted, es engañar a la gente",
+                        ""));
+        setPoolFrasesObscenas(obscenas);
+    }
 }
