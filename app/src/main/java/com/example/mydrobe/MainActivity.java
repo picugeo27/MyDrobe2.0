@@ -287,6 +287,11 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void FrasesPredeterminadas(){
+        String a="";
+        ArrayList<String> n=usuario.getPoolfrasesNormales();
+        n.add(a);
+        ArrayList<String> o=usuario.getPoolfrasesObscenas();
+        o.add(a);
         ArrayList<String> normales = new ArrayList<String>(
                 Arrays.asList("El único modo de hacer un gran trabajo es amar lo que haces","Cuanto más duramente trabajo, más suerte tengo",
                         "La lógica te llevará de la a a la z. la imaginación te llevará a cualquier lugar","A veces la adversidad es lo que necesitas encarar para ser exitoso"));
