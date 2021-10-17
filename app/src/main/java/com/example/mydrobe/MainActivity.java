@@ -211,7 +211,6 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.interfaztienda);
         txPuntos = (TextView) findViewById(R.id.tx_puntos_tienda);
         txPuntos.setText(Integer.toString(usuario.getContador()));
-
     }
 
     public void showObsceno (View view){
@@ -239,7 +238,6 @@ public class MainActivity extends AppCompatActivity {
             showObsceno(view);
     }
 
-
     public void MejorarClicks(View view){
         if(usuario.pago(usuario.getValorClick()*10)){
             usuario.aplicarMejoraClicks();
@@ -249,6 +247,7 @@ public class MainActivity extends AppCompatActivity {
             mySnackbar.show();
         }
     }
+
     public void CrearFrase(View view){
         EditText eText = (EditText) findViewById(R.id.frasesCreadas);
         String str = eText.getText().toString();
@@ -267,7 +266,7 @@ public class MainActivity extends AppCompatActivity {
 
     public void ComprarFrase(View view){
         String frase;
-        if (usuario.pago(25)){
+        if (usuario.pago(30)){
             if (modo==0){
                 frase = usuario.yaEstaFrase(poolFrasesNormales,usuario.getPoolfrasesNormales());
                 usuario.AnadirFrase(usuario.getPoolfrasesNormales(),frase);
