@@ -3,8 +3,6 @@ package com.example.mydrobe;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.app.ActivityCompat;
-import androidx.core.content.ContextCompat;
 import androidx.core.content.ContextCompat;
 
 import android.Manifest;
@@ -13,7 +11,6 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.KeyEvent;
 import android.view.View;
 import android.widget.EditText;
@@ -23,24 +20,23 @@ import android.widget.Toast;
 import com.google.android.material.snackbar.Snackbar;
 
 import java.io.BufferedReader;
-import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
-import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
+import java.util.Arrays;
 import java.util.Random;
 
 public class MainActivity extends AppCompatActivity {
     Context context = this;
     File fichero = new File("/data/user/0/com.example.mydrobe/files/usuarioUnico.bat");
     int modo = 0;
-    ArrayList<String> poolFrasesNormales = new ArrayList<>();
-    ArrayList<String> poolFrasesObscenas = new ArrayList<>();
+    ArrayList<String> poolFrasesNormales;
+    ArrayList<String> poolFrasesObscenas;
     Usuario usuario = new Usuario();
 
     int requestCode = 200;
@@ -51,7 +47,6 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-
         verificarPermisos();
 
         txPuntos = (TextView) findViewById (R.id.tx_puntos);
@@ -60,8 +55,7 @@ public class MainActivity extends AppCompatActivity {
             } catch (IOException | ClassNotFoundException e) {
                 e.printStackTrace();
             }
-
-
+        FrasesPredeterminadas();
     }
 
     @Override
@@ -189,6 +183,14 @@ public class MainActivity extends AppCompatActivity {
         return poolFrasesObscenas;
     }
 
+    public void setPoolFrasesNormales(ArrayList<String> poolFrasesNormales) {
+        this.poolFrasesNormales = poolFrasesNormales;
+    }
+
+    public void setPoolFrasesObscenas(ArrayList<String> poolFrasesObscenas) {
+        this.poolFrasesObscenas = poolFrasesObscenas;
+    }
+
     public Usuario getUsuario() {
         return usuario;
     }
@@ -209,7 +211,6 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.interfaztienda);
         txPuntos = (TextView) findViewById(R.id.tx_puntos_tienda);
         txPuntos.setText(Integer.toString(usuario.getContador()));
-
     }
 
     public void showObsceno (View view){
@@ -237,23 +238,6 @@ public class MainActivity extends AppCompatActivity {
             showObsceno(view);
     }
 
-
-    public static void anadirFrases(String TipoFrase, ArrayList<String> poolFrases) throws FileNotFoundException, IOException {
-        String direccionArchivo="";
-        if (TipoFrase =="normal"){
-            direccionArchivo = "FrasesNormales.txt" ;
-        }else if(TipoFrase=="obsceno"){
-            direccionArchivo = "FrasesObscenas.txt" ;
-        }
-        String cadena;
-        FileReader f = new FileReader(direccionArchivo);
-        BufferedReader b = new BufferedReader(f);
-        while ((cadena = b.readLine()) != null) {
-            poolFrases.add(cadena);
-        }
-        b.close();
-    }
-
     public void MejorarClicks(View view){
         if(usuario.pago(usuario.getValorClick()*10)){
             usuario.aplicarMejoraClicks();
@@ -263,6 +247,7 @@ public class MainActivity extends AppCompatActivity {
             mySnackbar.show();
         }
     }
+
     public void CrearFrase(View view){
         EditText eText = (EditText) findViewById(R.id.frasesCreadas);
         String str = eText.getText().toString();
@@ -281,18 +266,33 @@ public class MainActivity extends AppCompatActivity {
 
     public void ComprarFrase(View view){
         String frase;
-        if (usuario.pago(25)){
+        if (usuario.pago(30)){
             if (modo==0){
-            frase = usuario.yaEstaFrase(poolFrasesNormales,usuario.getPoolfrasesNormales());
-            usuario.AnadirFrase(usuario.getPoolfrasesNormales(),frase);
-        } else {
-            frase = usuario.yaEstaFrase(poolFrasesObscenas,usuario.getPoolfrasesObscenas());
-            usuario.AnadirFrase(usuario.getPoolfrasesObscenas(),frase);
-        } if (frase==null) {
+                frase = usuario.yaEstaFrase(poolFrasesNormales,usuario.getPoolfrasesNormales());
+                usuario.AnadirFrase(usuario.getPoolfrasesNormales(),frase);
+            } else {
+                frase = usuario.yaEstaFrase(poolFrasesObscenas,usuario.getPoolfrasesObscenas());
+                usuario.AnadirFrase(usuario.getPoolfrasesObscenas(),frase);
+             } if (frase==null) {
                 Snackbar mySnackbar = Snackbar.make(view, "Ya has desbloqueado todas las frases", 1000);
                 mySnackbar.show();
             }
-    }
+        }
     }
 
+    public void FrasesPredeterminadas(){
+        String a="";
+        ArrayList<String> n=usuario.getPoolfrasesNormales();
+        n.add(a);
+        ArrayList<String> o=usuario.getPoolfrasesObscenas();
+        o.add(a);
+        ArrayList<String> normales = new ArrayList<String>(
+                Arrays.asList("El único modo de hacer un gran trabajo es amar lo que haces","Cuanto más duramente trabajo, más suerte tengo",
+                        "La lógica te llevará de la a a la z. la imaginación te llevará a cualquier lugar","A veces la adversidad es lo que necesitas encarar para ser exitoso"));
+        setPoolFrasesNormales(normales);
+        ArrayList<String> obscenas = new ArrayList<String>(
+                Arrays.asList("El metodo cascada es el mejor","ETA es una gran nación","Lo que nosotros hemos hecho, cosa que no hizo usted, es engañar a la gente",
+                        "Tú y yo tenemos una cita y tu ropa no está invitada.","Tienes cara de ser el 9 que le falta a mi 6."));
+        setPoolFrasesObscenas(obscenas);
+    }
 }

@@ -35,33 +35,6 @@
         app:layout_constraintVertical_bias="0.256" />
 
     <Button
-        android:id="@+id/btn_comprar_frase"
-        android:layout_width="231dp"
-        android:layout_height="90dp"
-        android:backgroundTint="#E6E6E6"
-        android:onClick="ComprarFrase"
-        android:text="Comprar Frase"
-        android:textColor="@color/black"
-        app:layout_constraintBottom_toBottomOf="@+id/btn_comprar_mejora"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/img_toldo_tienda"
-        app:layout_constraintVertical_bias="0.099" />
-
-    <Button
-        android:id="@+id/btn_comprar_mejora"
-        android:layout_width="231dp"
-        android:layout_height="90dp"
-        android:layout_marginBottom="44dp"
-        android:backgroundTint="#E6E6E6"
-        android:onClick="MejorarClicks"
-        android:text="@string/comprar_mejora"
-        android:textColor="@color/black"
-        app:layout_constraintBottom_toTopOf="@+id/tx_puntos_tienda"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
-
-    <Button
         android:id="@+id/btn_volver_atras"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -101,9 +74,34 @@
         android:textColor="#000000"
         app:layout_constraintBottom_toTopOf="@+id/btn_comprar_mejora"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/btn_comprar_frase"
-        app:layout_constraintVertical_bias="0.503" />
+        app:layout_constraintVertical_bias="0.55" />
+
+    <Button
+        android:id="@+id/btn_comprar_frase"
+        android:layout_width="231dp"
+        android:layout_height="90dp"
+        android:layout_marginTop="296dp"
+        android:backgroundTint="#E6E6E6"
+        android:onClick="ComprarFrase"
+        android:text="Comprar Frase"
+        android:textColor="@color/black"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <Button
+        android:id="@+id/btn_comprar_mejora"
+        android:layout_width="231dp"
+        android:layout_height="90dp"
+        android:layout_marginBottom="108dp"
+        android:backgroundTint="#E6E6E6"
+        android:onClick="MejorarClicks"
+        android:text="@string/comprar_mejora"
+        android:textColor="@color/black"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
