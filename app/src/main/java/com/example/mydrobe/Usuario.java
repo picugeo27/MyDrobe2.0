@@ -76,7 +76,7 @@ private int contador =  0;
         return false;
     }
 
-    public void AnadirFrase(@NonNull ArrayList<String> arrayFrases, String frase){//si quieres añadir a frases normales se le pasa el array normal, al igual que obsceno
+    public void anadirFrase(@NonNull ArrayList<String> arrayFrases, String frase){//si quieres añadir a frases normales se le pasa el array normal, al igual que obsceno
         if (frase!=null) {
             arrayFrases.add(frase);
         }

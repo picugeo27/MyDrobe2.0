@@ -4,25 +4,22 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
-import androidx.core.content.ContextCompat;
 
 import android.Manifest;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.os.Environment;
 import android.view.KeyEvent;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.google.android.material.snackbar.Snackbar;
 
-import java.io.BufferedReader;
-import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.io.File;
@@ -48,6 +45,7 @@ public class MainActivity extends AppCompatActivity {
     int requestCode = 200;
     int mlt=1;
     TextView txPuntos;
+    MediaPlayer mpNormal,mpObsceno;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -61,7 +59,9 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         txPuntos = (TextView) findViewById (R.id.tx_puntos);
         txPuntos.setText(Integer.toString(usuario.getContador()));
-        FrasesPredeterminadas();
+        frasesPredeterminadas();
+        mpNormal = MediaPlayer.create(this, R.raw.audiobtnnormal);
+        mpObsceno = MediaPlayer.create(this, R.raw.audiobtnobsceno);
     }
 
     @Override
@@ -139,23 +139,15 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
-    public void crearFichero() {
-        if (!fichero.exists()){
-            try {
-                fichero.createNewFile();
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-        }
-    }
-
     public void cliker(View view) {
         usuario.clicar();
         txPuntos.setText(Integer.toString(usuario.getContador()));
         if (modo==0) {
             fraseAleatoria(usuario.getPoolfrasesNormales());
+            mpNormal.start();
         } else{
             fraseAleatoria(usuario.getPoolfrasesObscenas());
+            mpObsceno.start();
         }
     }
 
@@ -248,7 +240,7 @@ public class MainActivity extends AppCompatActivity {
             showObsceno(view);
     }
 
-    public void MejorarClicks(View view){
+    public void mejorarClicks(View view){
         if(usuario.pago(usuario.getValorClick()*10)){
             usuario.aplicarMejoraClicks();
             txPuntos.setText(Integer.toString(usuario.getContador()));
@@ -258,14 +250,14 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
-    public void CrearFrase(View view){
+    public void crearFrase(View view){
         EditText eText = (EditText) findViewById(R.id.frasesCreadas);
         String str = eText.getText().toString();
         if (usuario.pago(50)){
             if (modo==0) {
-                usuario.AnadirFrase(usuario.getPoolfrasesNormales(), str);
+                usuario.anadirFrase(usuario.getPoolfrasesNormales(), str);
             } else{
-                usuario.AnadirFrase(usuario.getPoolfrasesObscenas(), str);
+                usuario.anadirFrase(usuario.getPoolfrasesObscenas(), str);
             }
             showTienda(view);
         } else{
@@ -274,15 +266,15 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
-    public void ComprarFrase(View view){
+    public void comprarFrase(View view){
         String frase;
         if (usuario.pago(25)){
             if (modo==0){
                 frase = usuario.yaEstaFrase(poolFrasesNormales,usuario.getPoolfrasesNormales());
-                usuario.AnadirFrase(usuario.getPoolfrasesNormales(),frase);
+                usuario.anadirFrase(usuario.getPoolfrasesNormales(),frase);
             } else {
                 frase = usuario.yaEstaFrase(poolFrasesObscenas,usuario.getPoolfrasesObscenas());
-                usuario.AnadirFrase(usuario.getPoolfrasesObscenas(),frase);
+                usuario.anadirFrase(usuario.getPoolfrasesObscenas(),frase);
              } if (frase==null) {
                 Snackbar mySnackbar = Snackbar.make(view, "Ya has desbloqueado todas las frases", 1000);
                 mySnackbar.show();
@@ -291,7 +283,7 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
-    public void FrasesPredeterminadas(){
+    public void frasesPredeterminadas(){
         String a="";
         ArrayList<String> n=usuario.getPoolfrasesNormales();
         n.add(a);
