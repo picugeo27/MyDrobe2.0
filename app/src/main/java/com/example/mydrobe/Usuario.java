@@ -1,14 +1,9 @@
 package com.example.mydrobe;
-
-import android.view.View;
-import android.widget.EditText;
-
 import androidx.annotation.NonNull;
-
-import com.google.android.material.snackbar.Snackbar;
 
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.lang.Math;
 
 public class Usuario  implements Serializable {
 private ArrayList<String> poolfrasesNormales=new ArrayList<>();
@@ -54,11 +49,11 @@ private int contador =  0;
     }
 
     public void aplicarMejoraClicks() {
-        this.setValorClick(valorClick*2);
+        this.setValorClick((int) Math.round(valorClick*1.5));
     }
 
     public String yaEstaFrase(ArrayList<String> frases, ArrayList<String> frases2){
-        boolean yaEsta = true;
+        boolean yaEsta;
         for (String delSistema: frases){
             yaEsta = frases2.contains(delSistema);
                 if (!yaEsta){
