@@ -19,8 +19,8 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.747" />
+        app:layout_constraintTop_toBottomOf="@+id/bt_moneda"
+        app:layout_constraintVertical_bias="0.08" />
 
     <TextView
         android:id="@+id/ayudaFrases"
@@ -30,12 +30,12 @@
         android:textColor="@color/white"
         android:textSize="15sp"
         android:visibility="invisible"
-        app:layout_constraintBottom_toBottomOf="@+id/tx_frases_bonitas"
+        app:layout_constraintBottom_toTopOf="@+id/bt_moneda"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.498"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.921" />
+        app:layout_constraintVertical_bias="0.8" />
 
     <Button
         android:id="@+id/btn_acceso_tienda"
@@ -78,7 +78,7 @@
         app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/bt_moneda"
-        app:layout_constraintVertical_bias="0.1"
+        app:layout_constraintVertical_bias="0.356"
         tools:ignore="TextContrastCheck" />
 
     <Button
@@ -128,6 +128,21 @@
         app:srcCompat="@android:drawable/ic_menu_help"
         tools:ignore="SpeakableTextPresentCheck" />
 
+    <TextView
+        android:id="@+id/ayudaPuntuacion"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="444dp"
+        android:text="Puntuacion actual."
+        android:textColor="@color/white"
+        android:textSize="15sp"
+        android:visibility="invisible"
+        app:layout_constraintBottom_toTopOf="@+id/floatingActionButton"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.906"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.81" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
