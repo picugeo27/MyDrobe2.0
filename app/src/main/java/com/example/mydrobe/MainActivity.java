@@ -298,4 +298,15 @@ public class MainActivity extends AppCompatActivity {
                         "Tú y yo tenemos una cita y tu ropa no está invitada.","Tienes cara de ser el 9 que le falta a mi 6."));
         setPoolFrasesObscenas(obscenas);
     }
+    public void ayuda(View view){
+        TextView ab = findViewById(R.id.ayudaBoton);
+        TextView af = findViewById(R.id.ayudaFrases);
+        if(ab.getVisibility() == View.VISIBLE){ //si es Visible lo pones Gone
+            ab.setVisibility(View.GONE);
+            af.setVisibility(View.GONE);
+        }else{ // si no es Visible, lo pones
+            ab.setVisibility(View.VISIBLE);
+            af.setVisibility(View.VISIBLE);
+        }
+    }
 }

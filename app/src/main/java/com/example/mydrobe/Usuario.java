@@ -51,7 +51,7 @@ private int contador =  0;
     public int clicar () { // esta funcion añade al contador del usuario el valor de su click
             contador=contador+(valorClick);
             return contador;
-        }
+    }
 
     public void aplicarMejoraClicks() {
         this.setValorClick(valorClick*2);
