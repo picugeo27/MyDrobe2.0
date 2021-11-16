@@ -301,12 +301,15 @@ public class MainActivity extends AppCompatActivity {
     public void ayuda(View view){
         TextView ab = findViewById(R.id.ayudaBoton);
         TextView af = findViewById(R.id.ayudaFrases);
+        TextView ap = findViewById(R.id.ayudaPuntuacion);
         if(ab.getVisibility() == View.VISIBLE){ //si es Visible lo pones Gone
             ab.setVisibility(View.GONE);
             af.setVisibility(View.GONE);
+            ap.setVisibility(View.GONE);
         }else{ // si no es Visible, lo pones
             ab.setVisibility(View.VISIBLE);
             af.setVisibility(View.VISIBLE);
+            ap.setVisibility(View.VISIBLE);
         }
     }
 }
