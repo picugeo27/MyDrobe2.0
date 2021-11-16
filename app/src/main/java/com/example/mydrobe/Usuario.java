@@ -48,6 +48,7 @@ private int contador =  0;
             return contador;
         }
 
+
     public void aplicarMejoraClicks() {
         this.setValorClick((int) Math.round(valorClick*1.5));
     }
