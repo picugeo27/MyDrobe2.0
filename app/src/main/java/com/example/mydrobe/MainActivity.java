@@ -298,4 +298,53 @@ public class MainActivity extends AppCompatActivity {
                         "Tú y yo tenemos una cita y tu ropa no está invitada.","Tienes cara de ser el 9 que le falta a mi 6."));
         setPoolFrasesObscenas(obscenas);
     }
+    public void ayuda(View view){
+        TextView ab = findViewById(R.id.ayudaBoton);
+        TextView af = findViewById(R.id.ayudaFrases);
+        TextView ap = findViewById(R.id.ayudaPuntuacion);
+        TextView at = findViewById(R.id.ayudaTienda);
+        TextView ao = findViewById(R.id.modoObsceno);
+        TextView ae = findViewById(R.id.ayudaEsc);
+        if(ab.getVisibility() == View.VISIBLE){ //si es Visible lo pones Gone
+            ab.setVisibility(View.GONE);
+            af.setVisibility(View.GONE);
+            ap.setVisibility(View.GONE);
+            at.setVisibility(View.GONE);
+            ao.setVisibility(View.GONE);
+        }else{ // si no es Visible, lo pones
+            ab.setVisibility(View.VISIBLE);
+            af.setVisibility(View.VISIBLE);
+            ap.setVisibility(View.VISIBLE);
+            at.setVisibility(View.VISIBLE);
+            ao.setVisibility(View.VISIBLE);
+        }
+    }
+    public void ACF(View view){
+        TextView ae = findViewById(R.id.ayudaEsc);
+        TextView ac = findViewById(R.id.ayudaCrear);
+        if(ae.getVisibility() == View.VISIBLE){ //si es Visible lo pones Gone
+            ae.setVisibility(View.GONE);
+            ac.setVisibility(View.GONE);
+        }else{ // si no es Visible, lo pones
+            ae.setVisibility(View.VISIBLE);
+            ac.setVisibility(View.VISIBLE);
+        }
+    }
+    public void ACT(View view){
+        TextView ae = findViewById(R.id.generador);
+        TextView ac = findViewById(R.id.creador);
+        TextView af = findViewById(R.id.skins);
+        TextView ad = findViewById(R.id.mb);
+        if(ae.getVisibility() == View.VISIBLE){ //si es Visible lo pones Gone
+            ae.setVisibility(View.GONE);
+            ac.setVisibility(View.GONE);
+            af.setVisibility(View.GONE);
+            ad.setVisibility(View.GONE);
+        }else{ // si no es Visible, lo pones
+            ae.setVisibility(View.VISIBLE);
+            ac.setVisibility(View.VISIBLE);
+            af.setVisibility(View.VISIBLE);
+            ad.setVisibility(View.VISIBLE);
+        }
+    }
 }
