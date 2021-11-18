@@ -6,6 +6,21 @@
     android:layout_height="match_parent"
     android:background="#5C7AEA">
 
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/floatingActionButton4"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:clickable="true"
+        android:onClick="ACT"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.966"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.976"
+        app:srcCompat="@android:drawable/ic_menu_help"
+        tools:ignore="SpeakableTextPresentCheck" />
+
     <ImageView
         android:id="@+id/img_toldo_tienda"
         android:layout_width="406dp"
@@ -32,7 +47,7 @@
         app:layout_constraintHorizontal_bias="0.497"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.256" />
+        app:layout_constraintVertical_bias="0.282" />
 
     <Button
         android:id="@+id/btn_volver_atras"
@@ -44,7 +59,7 @@
         android:textColor="@color/black"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.151"
+        app:layout_constraintHorizontal_bias="0.08"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.023" />
@@ -95,7 +110,7 @@
         android:id="@+id/btn_comprar_mejora"
         android:layout_width="231dp"
         android:layout_height="90dp"
-        android:layout_marginBottom="108dp"
+        android:layout_marginBottom="88dp"
         android:backgroundTint="#E6E6E6"
         android:onClick="mejorarClicks"
         android:text="@string/comprar_mejora"
@@ -113,9 +128,60 @@
         android:textColor="@color/black"
         app:layout_constraintBottom_toTopOf="@+id/img_toldo_tienda"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.876"
+        app:layout_constraintHorizontal_bias="0.962"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="1.0" />
+
+    <TextView
+        android:id="@+id/skins"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="8dp"
+        android:layout_marginBottom="45dp"
+        android:text="Cambia de skins!!"
+        android:visibility="invisible"
+        app:layout_constraintBottom_toTopOf="@+id/img_toldo_tienda"
+        app:layout_constraintEnd_toStartOf="@+id/btn_tienda_skins"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="1.0" />
+
+    <TextView
+        android:id="@+id/creador"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="14dp"
+        android:layout_marginBottom="10dp"
+        android:text="Entra en el creador de frases."
+        android:visibility="invisible"
+        app:layout_constraintBottom_toTopOf="@+id/btn_generar_Frase"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/btn_comprar_frase" />
+
+    <TextView
+        android:id="@+id/generador"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="13dp"
+        android:text="Entra en el generador de frases automaticas!!!"
+        android:visibility="invisible"
+        app:layout_constraintBottom_toTopOf="@+id/btn_comprar_frase"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/str_titulo_tienda" />
+
+    <TextView
+        android:id="@+id/mb"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:layout_marginBottom="9dp"
+        android:text="Dale y mejora a tope tu boton!!!"
+        android:visibility="invisible"
+        app:layout_constraintBottom_toTopOf="@+id/btn_comprar_mejora"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/btn_generar_Frase" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
