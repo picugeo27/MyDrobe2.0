@@ -36,6 +36,36 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.06" />
 
+    <ImageButton
+        android:id="@+id/imageButton4"
+        android:layout_width="102dp"
+        android:layout_height="87dp"
+        android:backgroundTint="#00FFFFFF"
+        android:scaleType="centerCrop"
+        app:srcCompat="@drawable/skin_shrek"
+        tools:layout_editor_absoluteX="247dp"
+        tools:layout_editor_absoluteY="546dp" />
+
+    <ImageButton
+        android:id="@+id/btn_skin_2"
+        android:layout_width="102dp"
+        android:layout_height="87dp"
+        android:backgroundTint="#00FFFFFF"
+        android:scaleType="centerCrop"
+        app:srcCompat="@drawable/skin_pikachu"
+        tools:layout_editor_absoluteX="244dp"
+        tools:layout_editor_absoluteY="373dp" />
+
+    <ImageButton
+        android:id="@+id/btn_skin_3"
+        android:layout_width="102dp"
+        android:layout_height="70dp"
+        android:backgroundTint="#00FFFFFF"
+        android:scaleType="centerCrop"
+        app:srcCompat="@drawable/skin_steve"
+        tools:layout_editor_absoluteX="82dp"
+        tools:layout_editor_absoluteY="553dp" />
+
     <ImageView
         android:id="@+id/imageView"
         android:layout_width="385dp"
@@ -48,50 +78,15 @@
         app:layout_constraintVertical_bias="0.138"
         app:srcCompat="@drawable/tienda_background_image" />
 
-    <Button
+    <ImageButton
         android:id="@+id/btn_skin_1"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:background="#00FFFFFF"
-        app:layout_constraintBottom_toTopOf="@+id/btn_skin_3"
-        app:layout_constraintEnd_toStartOf="@+id/btn_skin_2"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/imageView" />
-
-    <Button
-        android:id="@+id/btn_skin_2"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:background="#00FFFFFF"
-        app:layout_constraintBottom_toTopOf="@+id/btn_skin_4"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.78"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/imageView"
-        app:layout_constraintVertical_bias="0.497" />
-
-    <Button
-        android:id="@+id/btn_skin_3"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:background="#00FFFFFF"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toStartOf="@+id/btn_skin_4"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/imageView"
-        app:layout_constraintVertical_bias="0.616" />
-
-    <Button
-        android:id="@+id/btn_skin_4"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:background="#00FFFFFF"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.78"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/imageView"
-        app:layout_constraintVertical_bias="0.616" />
+        android:layout_width="102dp"
+        android:layout_height="87dp"
+        android:backgroundTint="#00FFFFFF"
+        android:scaleType="centerCrop"
+        app:srcCompat="@drawable/skin_castaña"
+        tools:layout_editor_absoluteX="82dp"
+        tools:layout_editor_absoluteY="372dp" />
 
     <TextView
         android:id="@+id/txt_titulo_tienda_skins"
@@ -101,7 +96,6 @@
         android:textAlignment="center"
         android:textColor="@color/white"
         android:textSize="40sp"
-        app:layout_constraintBottom_toTopOf="@+id/btn_skin_1"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/imageView" />
