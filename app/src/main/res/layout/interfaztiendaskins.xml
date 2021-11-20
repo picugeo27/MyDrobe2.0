@@ -37,34 +37,51 @@
         app:layout_constraintVertical_bias="0.06" />
 
     <ImageButton
-        android:id="@+id/imageButton4"
+        android:id="@+id/btn_skin_4"
         android:layout_width="102dp"
         android:layout_height="87dp"
+        android:layout_marginBottom="16dp"
         android:backgroundTint="#00FFFFFF"
+        android:onClick="pressed"
         android:scaleType="centerCrop"
+        app:layout_constraintBottom_toTopOf="@+id/floatingActionButton5"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.802"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="1.0"
         app:srcCompat="@drawable/skin_shrek"
-        tools:layout_editor_absoluteX="247dp"
-        tools:layout_editor_absoluteY="546dp" />
+        tools:ignore="SpeakableTextPresentCheck" />
 
     <ImageButton
         android:id="@+id/btn_skin_2"
         android:layout_width="102dp"
         android:layout_height="87dp"
         android:backgroundTint="#00FFFFFF"
+        android:onClick="pressed"
         android:scaleType="centerCrop"
-        app:srcCompat="@drawable/skin_pikachu"
-        tools:layout_editor_absoluteX="244dp"
-        tools:layout_editor_absoluteY="373dp" />
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.802"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.605"
+        app:srcCompat="@drawable/skin_pikachu" />
 
     <ImageButton
         android:id="@+id/btn_skin_3"
         android:layout_width="102dp"
         android:layout_height="70dp"
         android:backgroundTint="#00FFFFFF"
+        android:onClick="pressed"
         android:scaleType="centerCrop"
-        app:srcCompat="@drawable/skin_steve"
-        tools:layout_editor_absoluteX="82dp"
-        tools:layout_editor_absoluteY="553dp" />
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.223"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.856"
+        app:srcCompat="@drawable/skin_steve" />
 
     <ImageView
         android:id="@+id/imageView"
@@ -83,10 +100,15 @@
         android:layout_width="102dp"
         android:layout_height="87dp"
         android:backgroundTint="#00FFFFFF"
+        android:onClick="pressed"
         android:scaleType="centerCrop"
-        app:srcCompat="@drawable/skin_castaña"
-        tools:layout_editor_absoluteX="82dp"
-        tools:layout_editor_absoluteY="372dp" />
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.223"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.605"
+        app:srcCompat="@drawable/skin_castana" />
 
     <TextView
         android:id="@+id/txt_titulo_tienda_skins"
@@ -99,4 +121,19 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/imageView" />
+
+    <Button
+        android:id="@+id/btn_defecto"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:backgroundTint="#E6E6E6"
+        android:onClick="pressed"
+        android:text="Por defecto"
+        android:textColor="#000000"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.941"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.06" />
 </androidx.constraintlayout.widget.ConstraintLayout>

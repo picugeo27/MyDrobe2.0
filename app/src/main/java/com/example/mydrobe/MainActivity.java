@@ -1,5 +1,6 @@
 package com.example.mydrobe;
 
+import androidx.annotation.IntDef;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
@@ -15,7 +16,11 @@ import android.os.Bundle;
 import android.os.Environment;
 import android.view.KeyEvent;
 import android.view.View;
+import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageButton;
+import android.widget.ImageView;
+import android.widget.Switch;
 import android.widget.TextView;
 
 import com.google.android.material.snackbar.Snackbar;
@@ -47,6 +52,9 @@ public class MainActivity extends AppCompatActivity {
     TextView txPuntos;
     MediaPlayer mpNormal,mpObsceno;
 
+    int skinActual = 0 ;
+    Button buttonMain;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -62,7 +70,12 @@ public class MainActivity extends AppCompatActivity {
         frasesPredeterminadas();
         mpNormal = MediaPlayer.create(this, R.raw.audiobtnnormal);
         mpObsceno = MediaPlayer.create(this, R.raw.audiobtnobsceno);
+
+
     }
+
+
+
 
     @Override
     protected void onPause() {
@@ -113,6 +126,8 @@ public class MainActivity extends AppCompatActivity {
         }
         return super.onKeyDown(keyCode, event);
     }
+
+
 
     private void guardarUsuario() throws IOException {
         ObjectOutputStream oos = null;
@@ -215,6 +230,13 @@ public class MainActivity extends AppCompatActivity {
         txPuntos.setText(Integer.toString(usuario.getContador()));
     }
 
+    public void showTiendaSkins(View view){
+        setContentView(R.layout.interfaztiendaskins);
+
+    }
+
+
+
     public void showObsceno (View view) {
         modo=1;
         setContentView(R.layout.interfazobscene);
@@ -227,6 +249,31 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         txPuntos = (TextView) findViewById (R.id.tx_puntos);
         txPuntos.setText(Integer.toString(usuario.getContador()));
+        setSkin(view);
+    }
+    public void setSkin(View view){
+        buttonMain = findViewById(R.id.bt_moneda);
+
+        switch (skinActual){
+            case 0:
+                buttonMain.setForeground(getDrawable(R.drawable.efecto_btn_moneda));
+                break;
+
+            case 1:
+             buttonMain.setForeground(getDrawable(R.drawable.skin_castana));
+             break;
+
+            case 2:
+                buttonMain.setForeground(getDrawable(R.drawable.skin_pikachu));
+                break;
+            case 3:
+                buttonMain.setForeground(getDrawable(R.drawable.skin_steve));
+                break;
+            case 4:
+                buttonMain.setForeground(getDrawable(R.drawable.skin_shrek));
+                break;
+
+        }
     }
 
     public void showCrearFrase (View view) {
@@ -319,6 +366,8 @@ public class MainActivity extends AppCompatActivity {
             ao.setVisibility(View.VISIBLE);
         }
     }
+
+
     public void ACF(View view){
         TextView ae = findViewById(R.id.ayudaEsc);
         TextView ac = findViewById(R.id.ayudaCrear);
@@ -347,4 +396,34 @@ public class MainActivity extends AppCompatActivity {
             ad.setVisibility(View.VISIBLE);
         }
     }
+
+    View.OnClickListener onClickListener = new View.OnClickListener() {
+        @Override
+        public void onClick(View view) {
+            pressed(view);
+        }
+    };
+
+
+    public void pressed(View view){
+        switch(view.getId()){
+            case R.id.btn_defecto:
+                skinActual = 0;
+                break;
+            case R.id.btn_skin_1:
+                skinActual = 1;
+                break;
+            case R.id.btn_skin_2:
+                skinActual = 2;
+                break;
+            case R.id.btn_skin_3:
+                skinActual = 3;
+                break;
+            case R.id.btn_skin_4:
+                skinActual = 4;
+                break;
+        }
+    }
+
+
 }
