@@ -17,6 +17,7 @@ import android.view.KeyEvent;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.google.android.material.snackbar.Snackbar;
 
@@ -34,6 +35,7 @@ public class MainActivity extends AppCompatActivity {
 
     private static final int PERMISSION_CODE = 1;
     private static final int PERMISSION_REQUEST_CODE = 1;
+    private static final int PUNTOS_PARA_PRESTIGIO = 10000000;
 
     Context context = this;
     int modo = 0;
@@ -43,21 +45,21 @@ public class MainActivity extends AppCompatActivity {
     Usuario usuario = new Usuario();
 
     int requestCode = 200;
-    int mlt=1;
+    int mlt = 1;
     TextView txPuntos;
-    MediaPlayer mpNormal,mpObsceno;
+    MediaPlayer mpNormal, mpObsceno;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
         try {
-                inicializarSistema();
-            } catch (IOException | ClassNotFoundException e) {
-                e.printStackTrace();
-            }
+            inicializarSistema();
+        } catch (IOException | ClassNotFoundException e) {
+            e.printStackTrace();
+        }
         setContentView(R.layout.activity_main);
-        txPuntos = (TextView) findViewById (R.id.tx_puntos);
+        txPuntos = (TextView) findViewById(R.id.tx_puntos);
         txPuntos.setText(Integer.toString(usuario.getContador()));
         frasesPredeterminadas();
         mpNormal = MediaPlayer.create(this, R.raw.audiobtnnormal);
@@ -74,11 +76,10 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
-    private boolean checkPermissions(){
-        if(ActivityCompat.checkSelfPermission(this, Manifest.permission.WRITE_EXTERNAL_STORAGE) == PackageManager.PERMISSION_GRANTED) {
+    private boolean checkPermissions() {
+        if (ActivityCompat.checkSelfPermission(this, Manifest.permission.WRITE_EXTERNAL_STORAGE) == PackageManager.PERMISSION_GRANTED) {
             return true;
-        }
-        else {
+        } else {
             ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE}, PERMISSION_CODE);
             return false;
         }
@@ -86,13 +87,13 @@ public class MainActivity extends AppCompatActivity {
 
     @Override
     public boolean onKeyDown(int keyCode, KeyEvent event) {
-        if(keyCode==event.KEYCODE_BACK){
-            AlertDialog.Builder builder=new AlertDialog.Builder(this);
+        if (keyCode == event.KEYCODE_BACK) {
+            AlertDialog.Builder builder = new AlertDialog.Builder(this);
             builder.setMessage("¿Deseas salis de MYDrove?")
                     .setPositiveButton("Si", new DialogInterface.OnClickListener() {
                         @Override
                         public void onClick(DialogInterface dialogInterface, int i) {
-                            Intent intent=new Intent(Intent.ACTION_MAIN);
+                            Intent intent = new Intent(Intent.ACTION_MAIN);
                             intent.addCategory(Intent.CATEGORY_HOME);
                             intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                             startActivity(intent);
@@ -109,7 +110,7 @@ public class MainActivity extends AppCompatActivity {
                             dialogInterface.dismiss();
                         }
                     });
-                    builder.show();
+            builder.show();
         }
         return super.onKeyDown(keyCode, event);
     }
@@ -125,12 +126,11 @@ public class MainActivity extends AppCompatActivity {
         //Cargamos el usuario
         long files = fichero.length();
         boolean x = files == 0;
-        if(!x){
+        if (!x) {
             ObjectInputStream ois = new ObjectInputStream(new FileInputStream(fichero));
             this.usuario = (Usuario) ois.readObject();
             ois.close();
-        }
-        else if (!fichero.exists()){
+        } else if (!fichero.exists()) {
             if (checkPermissions()) {
                 FileOutputStream fileOutputStream = null;
                 fichero.createNewFile();
@@ -142,10 +142,10 @@ public class MainActivity extends AppCompatActivity {
     public void cliker(View view) {
         usuario.clicar();
         txPuntos.setText(Integer.toString(usuario.getContador()));
-        if (modo==0) {
+        if (modo == 0) {
             fraseAleatoria(usuario.getPoolfrasesNormales());
             mpNormal.start();
-        } else{
+        } else {
             fraseAleatoria(usuario.getPoolfrasesObscenas());
             mpObsceno.start();
         }
@@ -157,17 +157,17 @@ public class MainActivity extends AppCompatActivity {
         claseRandom.nextInt(RangoAleatorio);
         String FraseMostrar = poolFrases.get(claseRandom.nextInt(RangoAleatorio));
         TextView fraseAleatoria;
-        fraseAleatoria = (TextView) findViewById (R.id.tx_frases_bonitas);
+        fraseAleatoria = (TextView) findViewById(R.id.tx_frases_bonitas);
         fraseAleatoria.setText(FraseMostrar);
     }
 
     /*
-    ***********************************
-    *
-    * Setters y getters
-    *
-    * *********************************
-    */
+     ***********************************
+     *
+     * Setters y getters
+     *
+     * *********************************
+     */
 
     public int getModo() {
         return modo;
@@ -202,12 +202,12 @@ public class MainActivity extends AppCompatActivity {
     }
 
     /*
-    ********************************
-    *
-    * Botones que cambian de interfaz (y el modo)
-    *
-    * *******************************
-    */
+     ********************************
+     *
+     * Botones que cambian de interfaz (y el modo)
+     *
+     * *******************************
+     */
 
     public void showTienda(View view) {
         setContentView(R.layout.interfaztienda);
@@ -215,33 +215,33 @@ public class MainActivity extends AppCompatActivity {
         txPuntos.setText(Integer.toString(usuario.getContador()));
     }
 
-    public void showObsceno (View view) {
-        modo=1;
+    public void showObsceno(View view) {
+        modo = 1;
         setContentView(R.layout.interfazobscene);
         txPuntos = (TextView) findViewById(R.id.tx_puntos);
         txPuntos.setText(Integer.toString(usuario.getContador()));
     }
 
-    public void showMenu (View view){
-        modo=0;
+    public void showMenu(View view) {
+        modo = 0;
         setContentView(R.layout.activity_main);
-        txPuntos = (TextView) findViewById (R.id.tx_puntos);
+        txPuntos = (TextView) findViewById(R.id.tx_puntos);
         txPuntos.setText(Integer.toString(usuario.getContador()));
     }
 
-    public void showCrearFrase (View view) {
+    public void showCrearFrase(View view) {
         setContentView(R.layout.frases_custom);
     }
 
-    public void atras (View view){
-        if (modo==0) {
+    public void atras(View view) {
+        if (modo == 0) {
             showMenu(view);
         } else
             showObsceno(view);
     }
 
-    public void mejorarClicks(View view){
-        if(usuario.pago(usuario.getValorClick()*10)){
+    public void mejorarClicks(View view) {
+        if (usuario.pago(usuario.getValorClick() * 10)) {
             usuario.aplicarMejoraClicks();
             txPuntos.setText(Integer.toString(usuario.getContador()));
         } else {
@@ -250,52 +250,62 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
-    public void crearFrase(View view){
+    public void crearFrase(View view) {
         EditText eText = (EditText) findViewById(R.id.frasesCreadas);
         String str = eText.getText().toString();
-        if (usuario.pago(50)){
-            if (modo==0) {
+        if (usuario.pago(50)) {
+            if (modo == 0) {
                 usuario.anadirFrase(usuario.getPoolfrasesNormales(), str);
-            } else{
+            } else {
                 usuario.anadirFrase(usuario.getPoolfrasesObscenas(), str);
             }
             showTienda(view);
-        } else{
+        } else {
             Snackbar mySnackbar = Snackbar.make(view, "No tienes dinero suficiente", 1000);
             mySnackbar.show();
         }
     }
 
-    public void comprarFrase(View view){
+    public void comprarFrase(View view) {
         String frase;
-        if (usuario.pago(25)){
-            if (modo==0){
-                frase = usuario.yaEstaFrase(poolFrasesNormales,usuario.getPoolfrasesNormales());
-                usuario.anadirFrase(usuario.getPoolfrasesNormales(),frase);
+        if (usuario.pago(25)) {
+            if (modo == 0) {
+                frase = usuario.yaEstaFrase(poolFrasesNormales, usuario.getPoolfrasesNormales());
+                usuario.anadirFrase(usuario.getPoolfrasesNormales(), frase);
             } else {
-                frase = usuario.yaEstaFrase(poolFrasesObscenas,usuario.getPoolfrasesObscenas());
-                usuario.anadirFrase(usuario.getPoolfrasesObscenas(),frase);
-             } if (frase==null) {
+                frase = usuario.yaEstaFrase(poolFrasesObscenas, usuario.getPoolfrasesObscenas());
+                usuario.anadirFrase(usuario.getPoolfrasesObscenas(), frase);
+            }
+            if (frase == null) {
                 Snackbar mySnackbar = Snackbar.make(view, "Ya has desbloqueado todas las frases", 1000);
                 mySnackbar.show();
-                usuario.setContador(usuario.getContador()+30);
+                usuario.setContador(usuario.getContador() + 30);
             }
         }
     }
 
-    public void frasesPredeterminadas(){
-        String a="";
-        ArrayList<String> n=usuario.getPoolfrasesNormales();
+    public void frasesPredeterminadas() {
+        String a = "";
+        ArrayList<String> n = usuario.getPoolfrasesNormales();
         n.add(a);
-        ArrayList<String> o=usuario.getPoolfrasesObscenas();
+        ArrayList<String> o = usuario.getPoolfrasesObscenas();
         o.add(a);
         ArrayList<String> normales = new ArrayList<String>(
-                Arrays.asList("El único modo de hacer un gran trabajo es amar lo que haces","Cuanto más duramente trabajo, más suerte tengo",
-                        "La lógica te llevará de la a a la z. la imaginación te llevará a cualquier lugar","A veces la adversidad es lo que necesitas encarar para ser exitoso"));
+                Arrays.asList("El único modo de hacer un gran trabajo es amar lo que haces", "Cuanto más duramente trabajo, más suerte tengo",
+                        "La lógica te llevará de la a a la z. la imaginación te llevará a cualquier lugar", "A veces la adversidad es lo que necesitas encarar para ser exitoso"));
         setPoolFrasesNormales(normales);
         ArrayList<String> obscenas = new ArrayList<String>(
-                Arrays.asList("El metodo cascada es el mejor","ETA es una gran nación","Lo que nosotros hemos hecho, cosa que no hizo usted, es engañar a la gente",
-                        "Tú y yo tenemos una cita y tu ropa no está invitada.","Tienes cara de ser el 9 que le falta a mi 6."));
+                Arrays.asList("El metodo cascada es el mejor", "ETA es una gran nación", "Lo que nosotros hemos hecho, cosa que no hizo usted, es engañar a la gente",
+                        "Tú y yo tenemos una cita y tu ropa no está invitada.", "Tienes cara de ser el 9 que le falta a mi 6."));
         setPoolFrasesObscenas(obscenas);
+    }
+
+    public void modoPrestigio(View view){
+        if(usuario.getValorClick() > PUNTOS_PARA_PRESTIGIO){
+            usuario.setModoPrestigio();
+        }else{
+            Toast toast = Toast.makeText(this, "Consigue " + PUNTOS_PARA_PRESTIGIO + " puntos para desbloquear esta opción", Toast.LENGTH_LONG);
+            toast.show();
+        }
     }
 }
