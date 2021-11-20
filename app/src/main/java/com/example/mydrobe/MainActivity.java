@@ -22,6 +22,7 @@ import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.Switch;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.google.android.material.snackbar.Snackbar;
 
@@ -39,6 +40,7 @@ public class MainActivity extends AppCompatActivity {
 
     private static final int PERMISSION_CODE = 1;
     private static final int PERMISSION_REQUEST_CODE = 1;
+    private static final int PUNTOS_PARA_PRESTIGIO = 10000000;
 
     Context context = this;
     int modo = 0;
@@ -48,9 +50,9 @@ public class MainActivity extends AppCompatActivity {
     Usuario usuario = new Usuario();
 
     int requestCode = 200;
-    int mlt=1;
+    int mlt = 1;
     TextView txPuntos;
-    MediaPlayer mpNormal,mpObsceno;
+    MediaPlayer mpNormal, mpObsceno;
 
     int skinActual = 0 ;
     Button buttonMain;
@@ -60,22 +62,17 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
 
         try {
-                inicializarSistema();
-            } catch (IOException | ClassNotFoundException e) {
-                e.printStackTrace();
-            }
+            inicializarSistema();
+        } catch (IOException | ClassNotFoundException e) {
+            e.printStackTrace();
+        }
         setContentView(R.layout.activity_main);
         txPuntos = (TextView) findViewById (R.id.tx_puntos);
         txPuntos.setText(Integer.toString(usuario.getContador()));
         frasesPredeterminadas();
         mpNormal = MediaPlayer.create(this, R.raw.audiobtnnormal);
         mpObsceno = MediaPlayer.create(this, R.raw.audiobtnobsceno);
-
-
     }
-
-
-
 
     @Override
     protected void onPause() {
@@ -126,8 +123,6 @@ public class MainActivity extends AppCompatActivity {
         }
         return super.onKeyDown(keyCode, event);
     }
-
-
 
     private void guardarUsuario() throws IOException {
         ObjectOutputStream oos = null;
@@ -350,6 +345,15 @@ public class MainActivity extends AppCompatActivity {
                 Arrays.asList("El metodo cascada es el mejor","ETA es una gran nación","Lo que nosotros hemos hecho, cosa que no hizo usted, es engañar a la gente",
                         "Tú y yo tenemos una cita y tu ropa no está invitada.","Tienes cara de ser el 9 que le falta a mi 6."));
         setPoolFrasesObscenas(obscenas);
+    }
+
+    public void modoPrestigio(View view){
+        if(usuario.getValorClick() > PUNTOS_PARA_PRESTIGIO){
+            usuario.setModoPrestigio();
+        }else{
+            Toast toast = Toast.makeText(this, "Consigue " + PUNTOS_PARA_PRESTIGIO + " puntos para desbloquear esta opción", Toast.LENGTH_LONG);
+            toast.show();
+        }
     }
     public void ayuda(View view){
         TextView ab = findViewById(R.id.ayudaBoton);
