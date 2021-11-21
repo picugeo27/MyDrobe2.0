@@ -3,8 +3,6 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
-        <entry key="..\:/Users/User/StudioProjects/MyDrobe2.0/app/src/main/res/layout/activity_main.xml" value="0.151268115942029" />
-        <entry key="..\:/Users/User/StudioProjects/MyDrobe2.0/app/src/main/res/layout/interfazobscene.xml" value="0.151268115942029" />
         <entry key="..\:/Users/adria/AndroidStudioProjects/MyDrobe2.0/app/src/main/res/layout/activity_main.xml" value="0.36666666666666664" />
         <entry key="..\:/Users/adria/AndroidStudioProjects/MyDrobe2.0/app/src/main/res/layout/frases_custom.xml" value="0.36666666666666664" />
         <entry key="..\:/Users/adria/AndroidStudioProjects/MyDrobe2.0/app/src/main/res/layout/interfazhorny.xml" value="0.36666666666666664" />
@@ -12,6 +10,16 @@
         <entry key="..\:/Users/adria/AndroidStudioProjects/MyDrobe2.0/app/src/main/res/layout/interfaztienda.xml" value="0.36666666666666664" />
         <entry key="..\:/Users/adria/AndroidStudioProjects/MyDrobe2.0/app/src/main/res/mipmap-anydpi-v26/ic_launcher.xml" value="0.3828125" />
         <entry key="..\:/Users/adria/AndroidStudioProjects/MyDrobe2.0/app/src/main/res/mipmap-anydpi-v26/ic_launcher_round.xml" value="0.3671875" />
+        <entry key="..\:/Users/adria/StudioProjects/MyDrobe2.0/app/src/main/res/layout/activity_main.xml" value="0.3625" />
+        <entry key="..\:/Users/adria/StudioProjects/MyDrobe2.0/app/src/main/res/layout/frases_custom.xml" value="0.34427083333333336" />
+        <entry key="..\:/Users/adria/StudioProjects/MyDrobe2.0/app/src/main/res/layout/interfazobscene.xml" value="0.34427083333333336" />
+        <entry key="..\:/Users/adria/StudioProjects/MyDrobe2.0/app/src/main/res/layout/interfaztienda.xml" value="0.34427083333333336" />
+        <entry key="..\:/Users/adria/StudioProjects/MyDrobe2.0/app/src/main/res/layout/interfaztiendaskins.xml" value="0.34427083333333336" />
+        <entry key="..\:/Users/jaime/StudioProjects/MyDrobe2.0/app/src/main/res/drawable/efecto_btn_moneda.xml" value="0.23125" />
+        <entry key="..\:/Users/jaime/StudioProjects/MyDrobe2.0/app/src/main/res/layout/activity_main.xml" value="0.2" />
+        <entry key="..\:/Users/jaime/StudioProjects/MyDrobe2.0/app/src/main/res/layout/interfazobscene.xml" value="0.21557971014492755" />
+        <entry key="..\:/Users/jaime/StudioProjects/MyDrobe2.0/app/src/main/res/layout/interfaztienda.xml" value="0.264" />
+        <entry key="..\:/Users/jaime/StudioProjects/MyDrobe2.0/app/src/main/res/layout/interfaztiendaskins.xml" value="0.25416666666666665" />
         <entry key="..\:/Users/picug/AndroidStudioProjects/MyDrobe/app/src/main/res/drawable/efecto_btn_moneda.xml" value="0.2703125" />
         <entry key="..\:/Users/picug/AndroidStudioProjects/MyDrobe/app/src/main/res/layout/activity_main.xml" value="0.264" />
         <entry key="..\:/Users/picug/AndroidStudioProjects/MyDrobe/app/src/main/res/layout/interfazobscene.xml" value="0.203125" />

@@ -347,7 +347,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void modoPrestigio(View view){
-        if(usuario.getValorClick() > PUNTOS_PARA_PRESTIGIO){
+        if(usuario.getContador() > PUNTOS_PARA_PRESTIGIO){
             usuario.setModoPrestigio();
         }else{
             Toast toast = Toast.makeText(this, "Consigue " + PUNTOS_PARA_PRESTIGIO + " puntos para desbloquear esta opción", Toast.LENGTH_LONG);
