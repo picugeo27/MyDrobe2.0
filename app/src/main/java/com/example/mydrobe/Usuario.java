@@ -35,6 +35,11 @@ private int contador =  0;
         this.valorClick = valorClick;
     }
 
+    public void setModoPrestigio() {
+        this.valorClick = 2;
+        this.contador = 0;
+    }
+
     public int getContador() {
         return contador;
     }
