@@ -12,16 +12,17 @@
         android:layout_width="88dp"
         android:layout_height="74dp"
         android:layout_marginTop="444dp"
+        android:layout_marginBottom="13dp"
         android:text="Tienda para comprar objetos extra."
         android:textColor="@color/white"
         android:textSize="15sp"
         android:visibility="invisible"
-        app:layout_constraintBottom_toTopOf="@+id/floatingActionButton"
+        app:layout_constraintBottom_toTopOf="@+id/btn_acceso_tienda"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.244"
+        app:layout_constraintHorizontal_bias="0.275"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.9" />
+        app:layout_constraintVertical_bias="0.85" />
 
     <TextView
         android:id="@+id/ayudaBoton"
@@ -100,8 +101,8 @@
 
     <Button
         android:id="@+id/bt_moneda"
-        android:layout_width="359dp"
-        android:layout_height="358dp"
+        android:layout_width="353dp"
+        android:layout_height="352dp"
         android:backgroundTint="#00FFFFFF"
         android:foreground="@drawable/efecto_btn_moneda"
         android:onClick="cliker"
@@ -111,7 +112,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.388"
+        app:layout_constraintVertical_bias="0.382"
         tools:ignore="SpeakableTextPresentCheck" />
 
     <Button
@@ -155,10 +156,10 @@
         android:visibility="invisible"
         app:layout_constraintBottom_toTopOf="@+id/floatingActionButton"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.695"
+        app:layout_constraintHorizontal_bias="0.774"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.859" />
+        app:layout_constraintVertical_bias="0.774" />
 
     <TextView
         android:id="@+id/modoObsceno"

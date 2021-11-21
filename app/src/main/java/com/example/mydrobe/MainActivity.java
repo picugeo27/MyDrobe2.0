@@ -388,21 +388,35 @@ public class MainActivity extends AppCompatActivity {
             ac.setVisibility(View.VISIBLE);
         }
     }
+    public void ACTS(View view){
+        TextView ae = findViewById(R.id.defecto);
+        TextView ac = findViewById(R.id.elegir);
+        if(ae.getVisibility() == View.VISIBLE){ //si es Visible lo pones Gone
+            ae.setVisibility(View.GONE);
+            ac.setVisibility(View.GONE);
+        }else{ // si no es Visible, lo pones
+            ae.setVisibility(View.VISIBLE);
+            ac.setVisibility(View.VISIBLE);
+        }
+    }
     public void ACT(View view){
         TextView ae = findViewById(R.id.generador);
         TextView ac = findViewById(R.id.creador);
         TextView af = findViewById(R.id.skins);
         TextView ad = findViewById(R.id.mb);
+        TextView ag = findViewById(R.id.ayudaPrestigio);
         if(ae.getVisibility() == View.VISIBLE){ //si es Visible lo pones Gone
             ae.setVisibility(View.GONE);
             ac.setVisibility(View.GONE);
             af.setVisibility(View.GONE);
             ad.setVisibility(View.GONE);
+            ag.setVisibility(View.GONE);
         }else{ // si no es Visible, lo pones
             ae.setVisibility(View.VISIBLE);
             ac.setVisibility(View.VISIBLE);
             af.setVisibility(View.VISIBLE);
             ad.setVisibility(View.VISIBLE);
+            ag.setVisibility(View.VISIBLE);
         }
     }
 
