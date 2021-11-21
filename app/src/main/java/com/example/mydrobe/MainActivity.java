@@ -276,11 +276,6 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
-    public void showTiendaSkins(View view) {
-        setContentView(R.layout.interfaztiendaskins);
-        txPuntos = (TextView) findViewById(R.id.tx_puntos_tienda);
-        txPuntos.setText(Integer.toString(usuario.getContador()));
-    }
 
     public void showCrearFrase (View view) {
         setContentView(R.layout.frases_custom);
