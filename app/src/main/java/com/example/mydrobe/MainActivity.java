@@ -228,6 +228,8 @@ public class MainActivity extends AppCompatActivity {
 
     public void showTiendaSkins(View view) {
         setContentView(R.layout.interfaztiendaskins);
+        /*txPuntos = (TextView) findViewById(R.id.tx_puntos_tienda);
+        txPuntos.setText(Integer.toString(usuario.getContador()));*/
 
     }
 
@@ -254,17 +256,46 @@ public class MainActivity extends AppCompatActivity {
                 break;
 
             case 1:
-             buttonMain.setForeground(getDrawable(R.drawable.skin_castana));
+                if( usuario.getSkinsCompradas().contains("Castaña") ) {
+                    buttonMain.setForeground(getDrawable(R.drawable.skin_castana));
+                }
+                else  {
+                    buttonMain.setForeground(getDrawable(R.drawable.skin_castana));
+                    usuario.getSkinsCompradas().add("Castaña");
+                }
+
              break;
 
             case 2:
-                buttonMain.setForeground(getDrawable(R.drawable.skin_pikachu));
+                if( usuario.getSkinsCompradas().contains("Pikachu") ) {
+                    buttonMain.setForeground(getDrawable(R.drawable.skin_pikachu));
+                    mpNormal = MediaPlayer.create(this, R.raw.audiobtnpikachu);
+                }
+                else  {
+                    buttonMain.setForeground(getDrawable(R.drawable.skin_pikachu));
+                    mpNormal = MediaPlayer.create(this, R.raw.audiobtnpikachu);
+                    usuario.getSkinsCompradas().add("Pikachu");
+                }
                 break;
             case 3:
-                buttonMain.setForeground(getDrawable(R.drawable.skin_steve));
+                if( usuario.getSkinsCompradas().contains("Steve") ) {
+                    buttonMain.setForeground(getDrawable(R.drawable.skin_steve));
+                    mpNormal = MediaPlayer.create(this, R.raw.audiobtnsteve);
+                }
+                else {
+                    buttonMain.setForeground(getDrawable(R.drawable.skin_steve));
+                    mpNormal = MediaPlayer.create(this, R.raw.audiobtnsteve);
+                    usuario.getSkinsCompradas().add("Steve");
+                }
                 break;
             case 4:
-                buttonMain.setForeground(getDrawable(R.drawable.skin_shrek));
+                if( usuario.getSkinsCompradas().contains("Shrek") ) {
+                    buttonMain.setForeground(getDrawable(R.drawable.skin_shrek));
+                }
+                else {
+                    buttonMain.setForeground(getDrawable(R.drawable.skin_shrek));
+                    usuario.getSkinsCompradas().add("Shrek");
+                }
                 break;
 
         }
@@ -279,12 +310,14 @@ public class MainActivity extends AppCompatActivity {
     public void atras (View view){
         if (modo==0) {
             showMenu(view);
+
         } else
             showObsceno(view);
     }
 
     public void atras2 (View view){
         showTienda(view);
+
     }
 
     public void mejorarClicks(View view){
@@ -429,21 +462,29 @@ public class MainActivity extends AppCompatActivity {
 
 
     public void pressed(View view){
-        switch(view.getId()){
+        switch(view.getId()) {
             case R.id.btn_defecto:
                 skinActual = 0;
                 break;
             case R.id.btn_skin_1:
-                skinActual = 1;
+                if (usuario.pago(500)) {
+                    skinActual = 1;
+                }
                 break;
             case R.id.btn_skin_2:
+                if (usuario.pago(500)) {
                 skinActual = 2;
+                }
                 break;
             case R.id.btn_skin_3:
-                skinActual = 3;
+                if (usuario.pago(500)) {
+                    skinActual = 3;
+                }
                 break;
             case R.id.btn_skin_4:
-                skinActual = 4;
+                if (usuario.pago(500)) {
+                    skinActual = 4;
+                }
                 break;
         }
     }

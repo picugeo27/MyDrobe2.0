@@ -8,6 +8,7 @@ import java.lang.Math;
 public class Usuario  implements Serializable {
 private ArrayList<String> poolfrasesNormales=new ArrayList<>();
 private ArrayList<String> poolfrasesObscenas=new ArrayList<>();
+private ArrayList<String> skinsCompradas = new ArrayList<>() ;
 private int valorClick= 1;
 private int contador =  0;
 
@@ -46,6 +47,14 @@ private int contador =  0;
 
     public void setContador(int contador) {
         this.contador = contador;
+    }
+
+    public ArrayList<String> getSkinsCompradas() {
+        return skinsCompradas;
+    }
+
+    public void setSkinsCompradas(ArrayList<String> skinsCompradas) {
+        this.skinsCompradas = skinsCompradas;
     }
 
     public int clicar () { // esta funcion añade al contador del usuario el valor de su click
