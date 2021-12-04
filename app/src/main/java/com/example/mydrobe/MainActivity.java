@@ -256,46 +256,25 @@ public class MainActivity extends AppCompatActivity {
                 break;
 
             case 1:
-                if( usuario.getSkinsCompradas().contains("Castaña") ) {
-                    buttonMain.setForeground(getDrawable(R.drawable.skin_castana));
-                }
-                else  {
                     buttonMain.setForeground(getDrawable(R.drawable.skin_castana));
                     usuario.getSkinsCompradas().add("Castaña");
-                }
-
              break;
 
             case 2:
-                if( usuario.getSkinsCompradas().contains("Pikachu") ) {
-                    buttonMain.setForeground(getDrawable(R.drawable.skin_pikachu));
-                    mpNormal = MediaPlayer.create(this, R.raw.audiobtnpikachu);
-                }
-                else  {
                     buttonMain.setForeground(getDrawable(R.drawable.skin_pikachu));
                     mpNormal = MediaPlayer.create(this, R.raw.audiobtnpikachu);
                     usuario.getSkinsCompradas().add("Pikachu");
-                }
+
                 break;
             case 3:
-                if( usuario.getSkinsCompradas().contains("Steve") ) {
-                    buttonMain.setForeground(getDrawable(R.drawable.skin_steve));
-                    mpNormal = MediaPlayer.create(this, R.raw.audiobtnsteve);
-                }
-                else {
+
                     buttonMain.setForeground(getDrawable(R.drawable.skin_steve));
                     mpNormal = MediaPlayer.create(this, R.raw.audiobtnsteve);
                     usuario.getSkinsCompradas().add("Steve");
-                }
-                break;
+                    break;
             case 4:
-                if( usuario.getSkinsCompradas().contains("Shrek") ) {
-                    buttonMain.setForeground(getDrawable(R.drawable.skin_shrek));
-                }
-                else {
                     buttonMain.setForeground(getDrawable(R.drawable.skin_shrek));
                     usuario.getSkinsCompradas().add("Shrek");
-                }
                 break;
 
         }
@@ -467,22 +446,34 @@ public class MainActivity extends AppCompatActivity {
                 skinActual = 0;
                 break;
             case R.id.btn_skin_1:
-                if (usuario.pago(500)) {
+                if( usuario.getSkinsCompradas().contains("Castaña") ) {
+                    skinActual = 1;
+                }
+               else if (usuario.pago(500)) {
                     skinActual = 1;
                 }
                 break;
             case R.id.btn_skin_2:
-                if (usuario.pago(500)) {
+                if( usuario.getSkinsCompradas().contains("Pikachu") ) {
+                    skinActual = 2;
+                }
+                else if (usuario.pago(500)) {
                 skinActual = 2;
                 }
                 break;
             case R.id.btn_skin_3:
-                if (usuario.pago(500)) {
+                if( usuario.getSkinsCompradas().contains("Steve") ) {
+                    skinActual = 3;
+                }
+               else  if (usuario.pago(500)) {
                     skinActual = 3;
                 }
                 break;
             case R.id.btn_skin_4:
-                if (usuario.pago(500)) {
+                if( usuario.getSkinsCompradas().contains("Shrek") ) {
+                    skinActual = 4;
+                }
+               else  if (usuario.pago(500)) {
                     skinActual = 4;
                 }
                 break;
