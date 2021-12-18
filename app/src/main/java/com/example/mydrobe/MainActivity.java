@@ -2,18 +2,26 @@ package com.example.mydrobe;
 
 import androidx.annotation.IntDef;
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
+import androidx.core.content.ContextCompat;
 
 import android.Manifest;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.graphics.drawable.BitmapDrawable;
+import android.graphics.drawable.Drawable;
 import android.media.MediaPlayer;
+import android.net.Uri;
 import android.os.Bundle;
 import android.os.Environment;
+import android.provider.MediaStore;
 import android.view.KeyEvent;
 import android.view.View;
 import android.widget.Button;
@@ -26,7 +34,9 @@ import android.widget.Toast;
 
 import com.google.android.material.snackbar.Snackbar;
 
+import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.io.InputStream;
 import java.util.ArrayList;
 import java.io.File;
 import java.io.FileInputStream;
@@ -41,6 +51,7 @@ public class MainActivity extends AppCompatActivity {
     private static final int PERMISSION_CODE = 1;
     private static final int PERMISSION_REQUEST_CODE = 1;
     private static final int PUNTOS_PARA_PRESTIGIO = 10000000;
+    private static final int elegirFichero = 10;
 
     Context context = this;
     int modo = 0;
@@ -53,6 +64,7 @@ public class MainActivity extends AppCompatActivity {
     int mlt = 1;
     TextView txPuntos;
     MediaPlayer mpNormal, mpObsceno;
+    Drawable skin = null;
 
     int skinActual = 0 ;
     Button buttonMain;
@@ -276,7 +288,9 @@ public class MainActivity extends AppCompatActivity {
                     buttonMain.setForeground(getDrawable(R.drawable.skin_shrek));
                     usuario.getSkinsCompradas().add("Shrek");
                 break;
-
+            case 5:
+                buttonMain.setForeground(skin);
+                break;
         }
     }
 
@@ -477,8 +491,33 @@ public class MainActivity extends AppCompatActivity {
                     skinActual = 4;
                 }
                 break;
+            case R.id.btn_galeria:
+                skinActual = 5;
+                cargarImagen();
+                break;
         }
     }
 
 
+    private void cargarImagen(){
+    Intent intent = new Intent(Intent.ACTION_PICK,MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
+    intent.setType("image/");
+    startActivityForResult(Intent.createChooser(intent,"Seleccione la galería"),elegirFichero);
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (resultCode==RESULT_OK){
+            try {
+            Uri ruta = data.getData();
+                InputStream imagen = getContentResolver().openInputStream(ruta);
+                Bitmap vista = BitmapFactory.decodeStream(imagen);
+                skin = new BitmapDrawable(getResources(), vista);
+            } catch (FileNotFoundException e) {
+                e.printStackTrace();
+            }
+
+        }
+    }
 }
