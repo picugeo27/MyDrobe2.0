@@ -6,26 +6,35 @@ import java.util.ArrayList;
 import java.lang.Math;
 
 public class Usuario  implements Serializable {
+
+    /*
+     ***********************************
+     *
+     * Variables
+     *
+     * *********************************
+     */
+
 private ArrayList<String> poolfrasesNormales=new ArrayList<>();
 private ArrayList<String> poolfrasesObscenas=new ArrayList<>();
 private ArrayList<String> skinsCompradas = new ArrayList<>() ;
 private int valorClick= 1;
 private int contador =  0;
 
+    /*
+     ***********************************
+     *
+     * Setters y getters
+     *
+     * *********************************
+     */
+
     public ArrayList<String> getPoolfrasesNormales() {
         return poolfrasesNormales;
     }
 
-    public void setPoolfrasesNormales(ArrayList<String> poolfrasesNormales) {
-        this.poolfrasesNormales = poolfrasesNormales;
-    }
-
     public ArrayList<String> getPoolfrasesObscenas() {
         return poolfrasesObscenas;
-    }
-
-    public void setPoolfrasesObscenas(ArrayList<String> poolfrasesObscenas) {
-        this.poolfrasesObscenas = poolfrasesObscenas;
     }
 
     public int getValorClick() {
@@ -53,20 +62,25 @@ private int contador =  0;
         return skinsCompradas;
     }
 
-    public void setSkinsCompradas(ArrayList<String> skinsCompradas) {
-        this.skinsCompradas = skinsCompradas;
-    }
-
     public int clicar () { // esta funcion añade al contador del usuario el valor de su click
             contador=contador+(valorClick);
             return contador;
     }
 
+    /*
+     ***********************************
+     *
+     * Metodos Principales
+     *
+     * *********************************
+     */
 
+    //Aumenta el numero de puntos obtenidos al clickar
     public void aplicarMejoraClicks() {
         this.setValorClick((int) Math.round(valorClick*1.5));
     }
 
+    //Comprueba si una frase ya se encuentra en la pool del usuario.
     public String yaEstaFrase(ArrayList<String> frases, ArrayList<String> frases2){
         boolean yaEsta;
         for (String delSistema: frases){
@@ -78,6 +92,7 @@ private int contador =  0;
         return null;
     }
 
+    //Reduce la cantidad de puntos del total del usuario
     public boolean pago(int coste){
         if (contador>=coste){
             contador= contador - coste;
@@ -86,6 +101,7 @@ private int contador =  0;
         return false;
     }
 
+    //Añade una frase a la pool del usuario
     public void anadirFrase(@NonNull ArrayList<String> arrayFrases, String frase){//si quieres añadir a frases normales se le pasa el array normal, al igual que obsceno
         if (frase!=null) {
             arrayFrases.add(frase);

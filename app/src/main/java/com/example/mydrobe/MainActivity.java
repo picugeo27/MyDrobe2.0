@@ -1,13 +1,10 @@
 package com.example.mydrobe;
 
-import androidx.annotation.IntDef;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
-import androidx.core.content.ContextCompat;
-
 import android.Manifest;
 import android.content.Context;
 import android.content.DialogInterface;
@@ -26,14 +23,9 @@ import android.view.KeyEvent;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.ImageButton;
-import android.widget.ImageView;
-import android.widget.Switch;
 import android.widget.TextView;
 import android.widget.Toast;
-
 import com.google.android.material.snackbar.Snackbar;
-
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStream;
@@ -53,15 +45,12 @@ public class MainActivity extends AppCompatActivity {
     private static final int PUNTOS_PARA_PRESTIGIO = 10000000;
     private static final int elegirFichero = 10;
 
-    Context context = this;
     int modo = 0;
     ArrayList<String> poolFrasesNormales;
     ArrayList<String> poolFrasesObscenas;
     File fichero = new File(Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOCUMENTS), "usuario.bat");
     Usuario usuario = new Usuario();
 
-    int requestCode = 200;
-    int mlt = 1;
     TextView txPuntos;
     MediaPlayer mpNormal, mpObsceno;
     Drawable skin = null;
@@ -226,18 +215,19 @@ public class MainActivity extends AppCompatActivity {
     /*
     ********************************
     *
-    * Botones que cambian de interfaz (y el modo)
+    * metodos que cambian la interfaz
     *
     * *******************************
     */
 
+    //Cambia la interfaz a la tienda
     public void showTienda(View view) {
         setContentView(R.layout.interfaztienda);
         txPuntos = (TextView) findViewById(R.id.tx_puntos_tienda);
         txPuntos.setText(Integer.toString(usuario.getContador()));
     }
 
-
+    //Cambia la interfaz a la tienda de skins
     public void showTiendaSkins(View view) {
         setContentView(R.layout.interfaztiendaskins);
         /*txPuntos = (TextView) findViewById(R.id.tx_puntos_tienda);
@@ -245,6 +235,7 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
+    //Cambia la interfaz al menu obsceno
     public void showObsceno (View view) {
         modo=1;
         setContentView(R.layout.interfazobscene);
@@ -252,6 +243,7 @@ public class MainActivity extends AppCompatActivity {
         txPuntos.setText(Integer.toString(usuario.getContador()));
     }
 
+    //Cambia la interfaz al menu normal
     public void showMenu (View view){
         modo=0;
         setContentView(R.layout.activity_main);
@@ -259,6 +251,37 @@ public class MainActivity extends AppCompatActivity {
         txPuntos.setText(Integer.toString(usuario.getContador()));
         setSkin(view);
     }
+
+    //Cambia la interfaz a el formulario para crear frases propias
+    public void showCrearFrase (View view) {
+        setContentView(R.layout.frases_custom);
+    }
+
+    //Vuelve a la interfaz anterior a tienda
+    public void atras (View view){
+        if (modo==0) {
+            showMenu(view);
+
+        } else
+            showObsceno(view);
+    }
+
+    //Vuelve a la interfaz anterior a tienda skins
+    public void atras2 (View view){
+        showTienda(view);
+
+    }
+
+
+    /*
+     ********************************
+     *
+     * metodos que cambian la skin
+     *
+     * *******************************
+     */
+
+    //Establece la skin que el usuario tenga selecionada
     public void setSkin(View view){
         buttonMain = findViewById(R.id.bt_moneda);
 
@@ -274,14 +297,12 @@ public class MainActivity extends AppCompatActivity {
 
             case 2:
                     buttonMain.setForeground(getDrawable(R.drawable.skin_pikachu));
-                    mpNormal = MediaPlayer.create(this, R.raw.audiobtnpikachu);
                     usuario.getSkinsCompradas().add("Pikachu");
 
                 break;
             case 3:
 
                     buttonMain.setForeground(getDrawable(R.drawable.skin_steve));
-                    mpNormal = MediaPlayer.create(this, R.raw.audiobtnsteve);
                     usuario.getSkinsCompradas().add("Steve");
                     break;
             case 4:
@@ -294,25 +315,96 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
+    //Cliker
+    View.OnClickListener onClickListener = new View.OnClickListener() {
+        @Override
+        public void onClick(View view) {
+            pressed(view);
+        }
+    };
 
-
-    public void showCrearFrase (View view) {
-        setContentView(R.layout.frases_custom);
+    //Permite al usuario comprar skins si tiene los puntos necesarios
+    public void pressed(View view){
+        switch(view.getId()) {
+            case R.id.btn_defecto:
+                skinActual = 0;
+                break;
+            case R.id.btn_skin_1:
+                if( usuario.getSkinsCompradas().contains("Castaña") ) {
+                    skinActual = 1;
+                }
+                else if (usuario.pago(500)) {
+                    skinActual = 1;
+                }
+                break;
+            case R.id.btn_skin_2:
+                if( usuario.getSkinsCompradas().contains("Pikachu") ) {
+                    skinActual = 2;
+                }
+                else if (usuario.pago(500)) {
+                    skinActual = 2;
+                }
+                break;
+            case R.id.btn_skin_3:
+                if( usuario.getSkinsCompradas().contains("Steve") ) {
+                    skinActual = 3;
+                }
+                else  if (usuario.pago(500)) {
+                    skinActual = 3;
+                }
+                break;
+            case R.id.btn_skin_4:
+                if( usuario.getSkinsCompradas().contains("Shrek") ) {
+                    skinActual = 4;
+                }
+                else  if (usuario.pago(500)) {
+                    skinActual = 4;
+                }
+                break;
+            case R.id.btn_galeria:
+                skinActual = 5;
+                cargarImagen();
+                if(skin == null){
+                    skinActual = 0;
+                }
+                break;
+        }
     }
 
-    public void atras (View view){
-        if (modo==0) {
-            showMenu(view);
-
-        } else
-            showObsceno(view);
+    //Permite cargar una imagen para ser utilizada como skin
+    private void cargarImagen(){
+        Intent intent = new Intent(Intent.ACTION_PICK,MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
+        intent.setType("image/");
+        startActivityForResult(Intent.createChooser(intent,"Seleccione la galería"),elegirFichero);
     }
 
-    public void atras2 (View view){
-        showTienda(view);
-
+    //Transforma la imagen al tipo de fichero compatible con skin
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (resultCode==RESULT_OK){
+            try {
+                Uri ruta = data.getData();
+                InputStream imagen = getContentResolver().openInputStream(ruta);
+                Bitmap vista = BitmapFactory.decodeStream(imagen);
+                skin = new BitmapDrawable(getResources(), vista);
+            } catch (FileNotFoundException e) {
+                e.printStackTrace();
+            }
+        }
+        else{
+            skin = null;
+        }
     }
+    /*
+     ********************************
+     *
+     * Otros metodos
+     *
+     * *******************************
+     */
 
+    //Permite al usuario auimentar el numero de puntos obtenidos al hacer click a cambio de una cantidad de puntos
     public void mejorarClicks(View view){
         if(usuario.pago(usuario.getValorClick()*10)){
             usuario.aplicarMejoraClicks();
@@ -322,7 +414,7 @@ public class MainActivity extends AppCompatActivity {
             mySnackbar.show();
         }
     }
-
+    //Permite al usuario crear una frase propia para ser añadida a su pool de frases a cambio de una cantidad de puntos
     public void crearFrase(View view){
         EditText eText = (EditText) findViewById(R.id.frasesCreadas);
         String str = eText.getText().toString();
@@ -339,6 +431,7 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
+    //Permite al usuario agregar una frase aleatoria a su pool de frases a cambio de una cantidad de puntos
     public void comprarFrase(View view){
         String frase;
         if (usuario.pago(25)){
@@ -355,7 +448,7 @@ public class MainActivity extends AppCompatActivity {
             }
         }
     }
-
+    //Establece las frases iniciales.
     public void frasesPredeterminadas(){
         String a="";
         ArrayList<String> n=usuario.getPoolfrasesNormales();
@@ -372,6 +465,7 @@ public class MainActivity extends AppCompatActivity {
         setPoolFrasesObscenas(obscenas);
     }
 
+    //Permite al usuario reiniciar su progresso a cambio de obtener más puntos al hacer click permanentemente
     public void modoPrestigio(View view){
         if(usuario.getContador() > PUNTOS_PARA_PRESTIGIO){
             usuario.setModoPrestigio();
@@ -380,6 +474,16 @@ public class MainActivity extends AppCompatActivity {
             toast.show();
         }
     }
+
+    /*
+     ********************************
+     *
+     * Metodos de ayuda al usuario
+     *
+     * *******************************
+     */
+
+    //Muestra al ususario una ayuda textual unica en cada interfaz.
     public void ayuda(View view){
         TextView ab = findViewById(R.id.ayudaBoton);
         TextView af = findViewById(R.id.ayudaFrases);
@@ -446,78 +550,11 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
-    View.OnClickListener onClickListener = new View.OnClickListener() {
-        @Override
-        public void onClick(View view) {
-            pressed(view);
-        }
-    };
+
+    /*
+     ********************************
+     */
 
 
-    public void pressed(View view){
-        switch(view.getId()) {
-            case R.id.btn_defecto:
-                skinActual = 0;
-                break;
-            case R.id.btn_skin_1:
-                if( usuario.getSkinsCompradas().contains("Castaña") ) {
-                    skinActual = 1;
-                }
-               else if (usuario.pago(500)) {
-                    skinActual = 1;
-                }
-                break;
-            case R.id.btn_skin_2:
-                if( usuario.getSkinsCompradas().contains("Pikachu") ) {
-                    skinActual = 2;
-                }
-                else if (usuario.pago(500)) {
-                skinActual = 2;
-                }
-                break;
-            case R.id.btn_skin_3:
-                if( usuario.getSkinsCompradas().contains("Steve") ) {
-                    skinActual = 3;
-                }
-               else  if (usuario.pago(500)) {
-                    skinActual = 3;
-                }
-                break;
-            case R.id.btn_skin_4:
-                if( usuario.getSkinsCompradas().contains("Shrek") ) {
-                    skinActual = 4;
-                }
-               else  if (usuario.pago(500)) {
-                    skinActual = 4;
-                }
-                break;
-            case R.id.btn_galeria:
-                skinActual = 5;
-                cargarImagen();
-                break;
-        }
-    }
 
-
-    private void cargarImagen(){
-    Intent intent = new Intent(Intent.ACTION_PICK,MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
-    intent.setType("image/");
-    startActivityForResult(Intent.createChooser(intent,"Seleccione la galería"),elegirFichero);
-    }
-
-    @Override
-    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
-        super.onActivityResult(requestCode, resultCode, data);
-        if (resultCode==RESULT_OK){
-            try {
-            Uri ruta = data.getData();
-                InputStream imagen = getContentResolver().openInputStream(ruta);
-                Bitmap vista = BitmapFactory.decodeStream(imagen);
-                skin = new BitmapDrawable(getResources(), vista);
-            } catch (FileNotFoundException e) {
-                e.printStackTrace();
-            }
-
-        }
-    }
 }
